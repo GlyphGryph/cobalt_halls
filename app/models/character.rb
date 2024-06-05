@@ -7,6 +7,7 @@ class Character < ApplicationRecord
   end
 
   def sees
-    room.description
+    other_characters = room.characters - [self]
+    puts room.description+"\n"+"Characters here: "+ other_characters.map(&:id).join(", ")
   end
 end

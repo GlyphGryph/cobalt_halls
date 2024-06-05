@@ -12,8 +12,8 @@ x Scaffolding - get a db installed, get latest version of rails installed.
 PART 1: BASIC NAVIGATION
 x Create a basic data model composed of 8 "rooms" that a "character" can be "moved" between via a "move" method given a room..
 x Give each room an individual description that can be viewed by calling a "sees" method for the character's current room.
-Create an additional character that can also be moved between the rooms, and have the "sees" method also return the names of other characters in the same room.
-Add a database level to preserve data between opening and closing app.
+x Create an additional character that can also be moved between the rooms, and have the "sees" method also return the names of other characters in the same room.
+x Add a database level to preserve data between opening and closing app.
 Allow user to "observe" a character, and see what messages that character receives without calling a command.
 Send character description of new room as a message when entering new room.
 Send character description of new character entering when a new character enters same room.
