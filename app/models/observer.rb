@@ -19,11 +19,14 @@ class Observer < ApplicationRecord
     end
   end
 
-  def display(message, source=nil)
-    print "===\n"
+  def display(messages, source=nil)
+    messages = Array(messages)
     lead = "WORLD"
     lead = source.name if(source.present?)
-    print lead+": "+message
+    print "=== Message from: #{lead} ===\n"
+    messages.each do |message|
+      print message+"\n"
+    end
     print "---\n"
   end
 end
