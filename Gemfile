@@ -7,9 +7,13 @@ gem "rails", "~> 7.0.8", ">= 7.0.8.3"
 gem "sprockets-rails"
 
 # Database
-gem "db-mariadb"
+gem "mysql2"
 
 gem "puma", "~> 6.0"
+
+# required for some reason?
+gem 'thread'
+gem 'pool'
 
 # bundled gems. Remove later?
 gem "importmap-rails"
@@ -17,7 +21,6 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-gem "bootsnap", require: false
 
 # Use Sass to process CSS
 gem "sassc-rails"

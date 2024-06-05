@@ -7,7 +7,7 @@ The powers themselves will be (somewhat indirectly) controlled by those players 
 Gameplan:
 PART 0:
 x Get hooked up to git
-Scaffolding - get a db installed, get latest version of rails installed.
+x Scaffolding - get a db installed, get latest version of rails installed.
 
 
 PART 1: BASIC NAVIGATION
