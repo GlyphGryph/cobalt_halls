@@ -15,8 +15,14 @@ x Give each room an individual description that can be viewed by calling a "sees
 x Create an additional character that can also be moved between the rooms, and have the "sees" method also return the names of other characters in the same room.
 x Add a database level to preserve data between opening and closing app.
 x Send character description of new room as a message when entering new room.
-Allow user to mark a character as being "observed" and only receive messages from "observed" characters.
+x Allow user to mark a character as being "observed" and only receive messages from "observed" characters.
 Send character description of new character entering when a new character enters same room.
 Add connections between rooms and only allow moving characters along connections - 3 axis cardinal with semicardinals as possible connections, with the connections defining the room and direction it's attached to on each end. *consider hexagons instead of octagons?)
 Give character a "facing" and display exits based on their current facing and select exits with commands relative to their facing.
 Automatically set facing based on connection character arrives from, and allow character to manually set facing.
+
+PART 2: BASIC WEB INTERFACE
+
+PART XX: LOGGING AND HISTORY
+Give each character a name
+Whenever a message is received by an observer, save it in addition to displaying it. Or something like that. Figure out how this should work, so when a person logs in they can see what they missed if they want.

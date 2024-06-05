@@ -1,10 +1,15 @@
 class Character < ApplicationRecord
   belongs_to :room
+  has_and_belongs_to_many :observers
 
   def move(destination)
     self.room = destination
     self.save!
-    sees
+    display(sees("You enter the room...\n"))
+  end
+
+  def name
+    id.to_s
   end
 
   def sees(lead=nil)
@@ -14,6 +19,16 @@ class Character < ApplicationRecord
     if(other_characters.present?)
       seen+= "Characters here: "+ other_characters.map(&:id).join(", ")+"\n"
     end
-    print seen
+    return seen
+  end
+
+  def look
+    display(sees)
+  end
+
+  def display(message)
+    observers.each do |observer|
+      observer.display(message, self)
+    end
   end
 end
