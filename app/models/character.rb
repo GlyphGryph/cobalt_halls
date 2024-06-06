@@ -6,12 +6,26 @@ class Character < ApplicationRecord
     return room.characters - [self]
   end
 
-  def move(destination)
-    other_characters.each{|oc| oc.display("#{name} has left the room.")}
+  def teleport(destination)
+    other_characters.each{|oc| oc.display("#{name} disppears in a flash of light.")}
     self.room = destination
     self.save!
-    display(sees("You enter the room..."))
-    other_characters.each{|oc| oc.display("#{name} has entered the room.")}
+    display(sees("With a flash of light, you find yourself in a new place..."))
+    other_characters.each{|oc| oc.display("#{name} pops into existence.")}
+  end
+
+  def move(direction)
+    target_connection = room.start_room_connections.find_by(start_room_direction: direction)
+    if(target_connection.present?)
+      destination = target_connection.end_room
+      other_characters.each{|oc| oc.display("#{name} leaves the room.")}
+      self.room = destination
+      self.save!
+      display(sees("You enter the room..."))
+      other_characters.each{|oc| oc.display("#{name} enters the room.")}
+    else
+      display("You can't move in that direction")
+    end
   end
 
   def name
@@ -25,6 +39,7 @@ class Character < ApplicationRecord
     if(other_characters.present?)
       seen << "Characters here: "+ other_characters.map(&:id).join(", ")
     end
+    seen << "Visible exists: "+room.exits.join(",")
     return seen
   end
 

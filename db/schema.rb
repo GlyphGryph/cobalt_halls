@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_05_144003) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_06_035104) do
   create_table "characters", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.bigint "room_id", null: false
     t.datetime "created_at", null: false
@@ -28,6 +28,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_05_144003) do
   create_table "observers", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "room_connections", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+    t.integer "start_room_id", null: false
+    t.integer "end_room_id", null: false
+    t.integer "start_room_direction", null: false
+    t.integer "end_room_direction", null: false
+    t.text "transition_message", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["end_room_id"], name: "index_room_connections_on_end_room_id"
+    t.index ["start_room_id"], name: "index_room_connections_on_start_room_id"
   end
 
   create_table "rooms", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|

@@ -20,9 +20,11 @@ x Send character description of new character entering when a new character ente
 Add connections between rooms and only allow moving characters along connections - 3 axis cardinal with semicardinals as possible connections, with the connections defining the room and direction it's attached to on each end. *consider hexagons instead of octagons?)
 Give character a "facing" and display exits based on their current facing and select exits with commands relative to their facing.
 Automatically set facing based on connection character arrives from, and allow character to manually set facing.
+Update messages to say which direction other characters enter from and leave to
 
 PART 2: BASIC WEB INTERFACE
 
 PART XX: LOGGING AND HISTORY
 Give each character a name
+Make sure characters using web interface receive updates of other characters moving in and out of room
 Whenever a message is received by an observer, save it in addition to displaying it. Or something like that. Figure out how this should work, so when a person logs in they can see what they missed if they want.
