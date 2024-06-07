@@ -1,0 +1,5 @@
+Whoo, this is fun.
+
+But also, hoo, this is rough. I need a proper way to communicate exits and visualize them - doing both relative AND hex directions is gonna confuse the fuck out of people unless I give it a really good UI... and maybe even then.
+
+If I'm doing halls and rooms, maybe the hex thing doesn't really make sense anyway. Relative cardinal directions would be a lot easier for people to follow.

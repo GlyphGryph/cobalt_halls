@@ -20,7 +20,6 @@ x Send character description of new character entering when a new character ente
 x Add connections between rooms and only allow moving characters along connections - 3 axis cardinal with semicardinals as possible connections, with the connections defining the room and direction it's attached to on each end. *consider hexagons instead of octagons?)
 x Give character a "facing" and display exits based on their current facing and select exits with commands relative to their facing.
 x Automatically set facing based on connection character arrives from, and allow character to manually set facing.
-Update messages to say which direction other characters enter from and leave to
 
 PART 2: BASIC WEB INTERFACE
 
