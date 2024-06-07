@@ -28,4 +28,8 @@ class Room < ApplicationRecord
       end_room_direction: direction
     )
   end
+
+  def name
+    self.id
+  end
 end
