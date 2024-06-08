@@ -1,5 +1,13 @@
+
+END OF WORLD
 The world is temporary, changing. It only lasts 2 to 4 months, a "cycle" (or some other better word). Individuals a chance to ascend to the higher rooms as their old rooms fall into ruin, or to support other members of their tribe doing the same, or to send offerings. Those who have the support of their tribe, support of a patron power, those who are well equipped and skilled, or are Favored by The Halls (have a paid supporter account) are most likely to ascend, but success is never guaranteed, and the more players who try the lower the chance for everyone.
 
 The stairs to the upper hall only open a week or two before the end, and not for a long time. Those left behind are trapped in a doomed world, trying to finish whatever they have to finish, strengthen their soul for reincarnation in the new world, send offerings to aid any who went on the journey, or simply to revel in the end or try to survive as long as possible alongside the starving and increasingly desperate creatures of the halls who also stayed or were trapped behind.
 
 There are ways to figure out when the end is coming. You can check the fuel of the torches, for example, and see how fast they are burning down. The halls are lit by the torches, but they only have enough fuel for most of a cycle, and tend to start running out when the stairs open (and finish prior to the Final Collapse). Some animals need seem to behave differently when the end is approaching, as if they know somehow how long the cycle will last. The Seas and the Storms will stray from their normal paths, becoming more chaotic, and the great plants that need to reach their final stage for the collapse will grow faster. Finally, the stars, if you have found a room with a view of them, will blink out steadily, and if you count them and see how many blink out each day, will allow you to calculate the end with accuracy.
+
+CUSTOM ROOM CONNECTIONS
+Maybe have the ability to customize connections. Like the ability to crawl through a window or work a way through a crack in the wall or something that might let them work their way past an open door in a regular direction?
+
+TIME BASED MOBS AND SCHEDULES
+When not controlled, characters (player and npc) will act on the end of every hour, and enemies that haven't been triggered recently will do the same. Players can configure automated behaviour for their character and characters under their command.

@@ -22,8 +22,20 @@ x Give character a "facing" and display exits based on their current facing and 
 x Automatically set facing based on connection character arrives from, and allow character to manually set facing.
 
 PART 2: BASIC WEB INTERFACE
+x Create a giant text display box and a smaller text submission box. Have it welcome the player to the game.
+Remove the welcome message. Create a websocket for people visiting the website to send messages back and forth and have it return a message to a newly connected person that says welcome to the game and provides some basic stats (number of characters, number of rooms).
+When a message is sent to an observer, broadcast it to all websockets.
+Send a message over the websocket in response to hitting enter in the input box which clears the input box and triggers a "look" command on the first character.
+Allow user to create an account and login via the command interface.
+When an account is created, attach it to a new observer attached to a new character
+Create a new "commander" module that forwards commands to a character
+
+Part 3: Testing and Changes
+Does all that stuff work? Does it feel right? If not, let's do a round of changing it.
+Change hex system to a cardinal coordinate system (should be pretty easy since it's barely really hex)
 
 PART XX: LOGGING AND HISTORY
 Give each character a name
 Make sure characters using web interface receive updates of other characters moving in and out of room
 Whenever a message is received by an observer, save it in addition to displaying it. Or something like that. Figure out how this should work, so when a person logs in they can see what they missed if they want.
+
