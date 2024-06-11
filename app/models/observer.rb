@@ -23,10 +23,12 @@ class Observer < ApplicationRecord
     messages = Array(messages)
     lead = "WORLD"
     lead = source.name if(source.present?)
-    print "=== Message from: #{lead} ===\n"
+    out = "=== Message from: #{lead} ===\n"
     messages.each do |message|
-      print message+"\n"
+      out += message+"\n"
     end
-    print "---\n"
+    out + "---\n"
+    print out
+    ActionCable.server.broadcast("game", {action: "display", messages: messages})
   end
 end

@@ -23,12 +23,14 @@ x Automatically set facing based on connection character arrives from, and allow
 
 PART 2: BASIC WEB INTERFACE
 x Create a giant text display box and a smaller text submission box. Have it welcome the player to the game.
-Remove the welcome message. Create a websocket for people visiting the website to send messages back and forth and have it return a message to a newly connected person that says welcome to the game and provides some basic stats (number of characters, number of rooms).
-When a message is sent to an observer, broadcast it to all websockets.
-Send a message over the websocket in response to hitting enter in the input box which clears the input box and triggers a "look" command on the first character.
-Allow user to create an account and login via the command interface.
-When an account is created, attach it to a new observer attached to a new character
-Create a new "commander" module that forwards commands to a character
+x Remove the welcome message. Create a websocket for people visiting the website to send messages back and forth and have it return a message to a newly connected person that says welcome to the game and provides some basic stats (number of characters, number of rooms).
+x When a message is sent to an observer, broadcast it to all websockets.
+x Send a message over the websocket in response to hitting enter in the input box which clears the input box and triggers a "look" command on the first character.
+Create a new "commander" module that forwards commands to a character like the observer receives messages.
+Only trigger the look command when the player types look.
+Allow user to create an account and login via the command interface by inputting specific commands.
+When an account is created, attach it to a new observer and commander attached to a new character
+Make channels observer and commander specific and only broadcast and receive messages from above responses to appropriate observers and commanders
 
 Part 3: Testing and Changes
 Does all that stuff work? Does it feel right? If not, let's do a round of changing it.
