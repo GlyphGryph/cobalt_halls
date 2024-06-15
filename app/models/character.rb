@@ -7,9 +7,31 @@ class Character < ApplicationRecord
     @command_list ||= {
       "look" => {
         id: "look",
+        description: "Shows contents of room",
         method: :look
+      },
+      "move" => {
+        id: "move",
+        description: "Requires a direction, 'move [direction]'. Moves character through an exit to a new area.",
+        method: :move
+      },
+      "help" => {
+        id: "help",
+        description: "Lists valid commands for character",
+        method: :help
       }
     }
+  end
+    
+
+  def help
+    return @help_response if @help_response
+    @help_response = []
+    @help_response << "Valid commands"
+    @command_list.values.each do |command|
+      @help_response << "#{command[:id]}: #{command[:description]}"
+    end
+    display(@help_response)
   end
 
   def other_characters
@@ -40,9 +62,15 @@ class Character < ApplicationRecord
     end
   end
 
-  def move(relative_direction)
-    absolute_direction = DirectionLogic.get_absolute_direction_from_relative_direction(self.facing, relative_direction)
-    absolute_move(absolute_direction)
+  def move(relative_direction=nil, *trash)
+    Rails.logger.info "TRYING TO MOVE #{relative_direction}"
+    if(relative_direction && Room::valid_directions.include?(relative_direction.to_i))
+      relative_direction = relative_direction.to_i
+      absolute_direction = DirectionLogic.get_absolute_direction_from_relative_direction(self.facing, relative_direction)
+      absolute_move(absolute_direction)
+    else
+      display("You must supply a valid direction.")
+    end
   end
 
   def name

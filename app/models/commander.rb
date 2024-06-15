@@ -1,16 +1,18 @@
 class Commander < ApplicationRecord
   belongs_to :subordinate, class_name: :Character, foreign_key: "character_id"  
 
-  def process(*components)
-    primary = components.first.downcase
-    puts "PRIMARY IS #{primary}"
+  def process(primary, components=[])
+    Rails.logger.info("COMMAND ISSUED || PRIMARY COMMAND: #{primary}, ARGUMENTS: #{components}")
+    primary = primary.downcase
     match = subordinate.command_list[primary]
-    puts "COMMAND LIST IS:"
-    p subordinate.command_list
     if(match.present?)
-      subordinate.send(match[:method])
+      if(components.present?)
+        subordinate.send(match[:method], *components)
+      else
+        subordinate.send(match[:method])
+      end
     else
-      subordinate.display("Invalid Command Character #{subordinate.id}: #{components.join(", ")}")
+      subordinate.display("Invalid Command Character #{subordinate.id}: #{primary} #{components.join(" ")}")
     end
   end
 end

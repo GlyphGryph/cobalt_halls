@@ -11,6 +11,7 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    @commander.process(data["body"])
+    message = data["body"].split(" ")
+    @commander.process(message.shift, message)
   end
 end
