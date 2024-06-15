@@ -1,6 +1,16 @@
 class Character < ApplicationRecord
   belongs_to :room
   has_and_belongs_to_many :observers
+  has_many :commanders
+ 
+  def command_list
+    @command_list ||= {
+      "look" => {
+        id: "look",
+        method: :look
+      }
+    }
+  end
 
   def other_characters
     return room.characters - [self]

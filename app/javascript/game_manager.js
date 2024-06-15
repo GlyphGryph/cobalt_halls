@@ -27,6 +27,7 @@ game.channel = game.cable.subscriptions.create({ channel: "GameChannel"}, {
 const command_box = document.getElementById("command-box");
 command_box.addEventListener( "submit", function( e ){
   e.preventDefault();
+  let command = command_box.querySelector('input').value;
   command_box.querySelector('input').value = "";
-  game.channel.send({body: "receive"});
+  game.channel.send({body: command});
 });

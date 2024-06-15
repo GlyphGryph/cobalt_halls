@@ -1,6 +1,7 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    # observer = Observer.first
+    @observer = Observer.first || Observer.create
+    @commander = Commander.first || Commander.create!(subordinate: Character.first)
     stream_from 'game'
     # stream_from "some_channel"
   end
@@ -10,6 +11,6 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    Character.first.look
+    @commander.process(data["body"])
   end
 end
