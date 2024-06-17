@@ -3,8 +3,8 @@ class Character < ApplicationRecord
   has_and_belongs_to_many :observers
   has_many :commanders
  
-  def command_list
-    @command_list ||= {
+  def self.command_list
+    @@command_list ||= {
       "look" => {
         id: "look",
         description: "Shows contents of room",
@@ -21,6 +21,10 @@ class Character < ApplicationRecord
         method: :help
       }
     }
+  end
+
+  def command_list
+    Character.command_list
   end
     
 
