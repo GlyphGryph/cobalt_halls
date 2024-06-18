@@ -1,7 +1,7 @@
 class Character < ApplicationRecord
   belongs_to :room
   has_and_belongs_to_many :observers
-  has_many :commanders
+  has_many :commanders, dependent: :destroy
  
   def self.command_list
     @@command_list ||= {

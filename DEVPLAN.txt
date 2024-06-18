@@ -34,7 +34,7 @@ x Implement other commands
 x Allow user to create an account and login via the command interface by inputting specific commands.
 x Allow user to logout and login as a different account
 x Do not allow user to login while already logged into an account
-When an account is created, attach it to a new observer and commander attached to a new character
+x When an account is created, attach it to a new observer and commander attached to a new character
 Make channels observer and commander specific and only broadcast and receive messages from above responses to appropriate observers and commanders
 
 PART 3: LOGGING AND HISTORY

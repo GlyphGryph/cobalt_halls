@@ -1,4 +1,5 @@
 class Commander < ApplicationRecord
+  has_and_belongs_to_many :accounts
   belongs_to :subordinate, class_name: :Character, foreign_key: "character_id"  
 
   def process(primary, components=[])

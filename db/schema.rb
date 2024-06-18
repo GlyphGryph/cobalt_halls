@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_15_035427) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_17_153742) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "observer_id"
     t.index ["name"], name: "index_accounts_on_name"
+    t.index ["observer_id"], name: "index_accounts_on_observer_id"
+  end
+
+  create_table "accounts_commanders", id: false, charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "commander_id", null: false
+    t.index ["account_id", "commander_id"], name: "index_accounts_commanders_on_account_id_and_commander_id"
+    t.index ["commander_id", "account_id"], name: "index_accounts_commanders_on_commander_id_and_account_id"
   end
 
   create_table "characters", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
@@ -64,6 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_15_035427) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "accounts", "observers"
   add_foreign_key "characters", "rooms"
   add_foreign_key "commanders", "characters"
 end

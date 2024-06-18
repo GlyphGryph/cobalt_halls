@@ -112,7 +112,7 @@ class GameChannel < ApplicationCable::Channel
     if(@current_account.blank?)
       session_broadcast "Not logged in."
     else
-      session_broadcast "Logged in as #{@current_account.name}"
+      session_broadcast "Logged in as #{@current_account.name}. Commanders are #{@current_account.commanders}. Observer is #{@current_account.observer}. Characters are #{@current_account.characters}"
     end
   end
 end

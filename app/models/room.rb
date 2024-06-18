@@ -1,7 +1,7 @@
 class Room < ApplicationRecord
   has_many :characters
-  has_many :start_room_connections, class_name: "RoomConnection", foreign_key: 'start_room_id'
-  has_many :end_room_connections, class_name: "RoomConnection", foreign_key: "end_room_id"
+  has_many :start_room_connections, class_name: "RoomConnection", foreign_key: 'start_room_id', dependent: :destroy
+  has_many :end_room_connections, class_name: "RoomConnection", foreign_key: "end_room_id", dependent: :destroy
   @@valid_directions = [1,2,3,4,5,6]
 
   def self.valid_directions
