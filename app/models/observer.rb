@@ -2,6 +2,10 @@ class Observer < ApplicationRecord
   has_one :account
   has_and_belongs_to_many :characters
 
+  def channel_id
+    @channel_id = "observer-#{self.id}"
+  end
+
   def observe(character)
     if(characters.include?(character))
       display("You are already observing #{character.name}")
@@ -30,6 +34,6 @@ class Observer < ApplicationRecord
     end
     out + "---\n"
     print out
-    ActionCable.server.broadcast("game", {action: "display", messages: messages})
+    ActionCable.server.broadcast(channel_id, {action: "display", messages: messages})
   end
 end

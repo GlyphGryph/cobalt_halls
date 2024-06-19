@@ -31,8 +31,8 @@ class GameChannel < ApplicationCable::Channel
     end
 
     # Pass any other commands to the account
-    if(@current_account.present? && @current_account.commander.present?)
-      @current_account.commander.process(message.shift, message)
+    if(@current_account.present? && @current_account.commanders.present?)
+      @current_account.commanders.first.process(message.shift, message)
       return
     end
 
@@ -82,17 +82,20 @@ class GameChannel < ApplicationCable::Channel
     if(result.blank?)
       session_broadcast "Account not found"
       return
-    else
-      @current_account = result.first
-      session_broadcast "Logged in as #{@current_account.name}"
-      return
     end
+
+    # LOGIN
+    @current_account = result.first
+    stream_from @current_account.observer.channel_id
+    session_broadcast "Logged in as #{@current_account.name}"
+    return
   end
 
   def logout(trash=nil)
     if(@current_account.blank?)
       session_broadcast "Not logged in"
-    else
+    else # LOGOUT
+      stop_stream_from @current_account.observer.channel_id
       @current_account = nil
       session_broadcast "Logged out"
     end

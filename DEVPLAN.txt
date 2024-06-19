@@ -35,7 +35,7 @@ x Allow user to create an account and login via the command interface by inputti
 x Allow user to logout and login as a different account
 x Do not allow user to login while already logged into an account
 x When an account is created, attach it to a new observer and commander attached to a new character
-Make channels observer and commander specific and only broadcast and receive messages from above responses to appropriate observers and commanders
+x Make channels observer and commander specific and only broadcast and receive messages from above responses to appropriate observers and commanders
 
 PART 3: LOGGING AND HISTORY
 Give each character a name
@@ -46,3 +46,6 @@ Also track commands processed by commanders.
 PART 4: TESTING AND CHANGES
 Does all that stuff work? Does it feel right? If not, let's do a round of changing it.
 Change hex system to a cardinal coordinate system (should be pretty easy since it's barely really hex)
+
+Part 5: User Interface
+Add elements to track current status
