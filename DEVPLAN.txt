@@ -46,10 +46,11 @@ x Figure out why "help" command isn't working.
 x Add ability to turn by command
 x Figure out why invalid commands give no response instead of an invalid command message
 Figure out why we aren't always getting our session display.
-Reset directions to have 0 be north instead of 1, simplify some of the math. Update direction and character logic.
-Fix problem where adding additional arguments throws errors
-Add error handling for all invalid commands
-Reorganize DEVPLAN doc
+x Reset directions to have 0 be north instead of 1, simplify some of the math. Update direction and character logic.
+x Fix problem where adding additional arguments throws errors
+Fix error when moving forward with no args
+x Add error handling for all invalid commands
+Reorganize DEVPLAN doc to put finished parts below break
 
 Part 4: UI IMPROVEMENTS
 Add elements to track current status

@@ -43,11 +43,11 @@ class DirectionLogic
   end
 
   def self.get_absolute_direction_from_relative_direction(facing, relative_direction)
-    return (facing+relative_direction-2)%4+1
+    return (facing+relative_direction)%4
   end
 
   def self.get_relative_direction_from_absolute_direction(facing, absolute_direction)
-    return (absolute_direction-facing)%4+1
+    return (absolute_direction-facing)%4
   end
 
   def self.perspective_name(facing, absolute_direction)
@@ -56,6 +56,6 @@ class DirectionLogic
   end
 
   def self.get_rotation(current_direction, change)
-    return (current_direction+change)%4+1
+    return (current_direction+change)%4
   end
 end

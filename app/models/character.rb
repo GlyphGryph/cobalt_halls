@@ -93,7 +93,7 @@ class Character < ApplicationRecord
       relative_direction = arguments.first.to_i
     end
 
-    if(!DirectionLogic.valid_directions.include?(direction))
+    if(!DirectionLogic.valid_directions.include?(relative_direction))
       display("That's not a valid direction")
       return
     end
@@ -129,11 +129,11 @@ class Character < ApplicationRecord
 
   def turn(arguments=[])
     if(arguments.empty?)
-      change_direction = 3
+      change_direction = 2
     else
       change_direction = arguments.first.to_i
     end
-    if(1 == change_direction)
+    if(0 == change_direction)
       display("You are already facing forward.")
       return
     end
@@ -144,11 +144,11 @@ class Character < ApplicationRecord
     self.facing=DirectionLogic.get_rotation(self.facing, change_direction)
     self.save!
     messages = []
-    if(2==change_direction)
+    if(1==change_direction)
       messages << "You turned right."
-    elsif(3==change_direction)
+    elsif(2==change_direction)
       messages << "You turned around."
-    elsif(4==change_direction)
+    elsif(3==change_direction)
       messages << "You turned left."
     end
     messages << visible_exits
