@@ -13,3 +13,5 @@ TIME BASED MOBS AND SCHEDULES
 When not controlled, characters (player and npc) will act on the end of every hour, and enemies that haven't been triggered recently will do the same. Players can configure automated behaviour for their character and characters under their command.
 
 Implement a "labeling" system - many things in games, including other players and characters, will not have game-defined names, only description and ids. The player can choose to "label" those things, permanently giving them a name when viewed from that character's perspective.
+
+We should have some way to handle blindness, and maybe have secondary sound-only filters for all actions?

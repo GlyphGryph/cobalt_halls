@@ -15,6 +15,11 @@ class Character < ApplicationRecord
         description: "Requires a direction, 'move [direction]'. Moves character through an exit to a new area.",
         method: :move
       },
+      "turn" => {
+        id: "turn",
+        description: "Change facing.",
+        method: :turn
+      },
       "help" => {
         id: "help",
         description: "Lists valid commands for character",
@@ -28,11 +33,11 @@ class Character < ApplicationRecord
   end
     
 
-  def help
+  def help(arguments=[])
     return @help_response if @help_response
     @help_response = []
     @help_response << "Valid commands"
-    @command_list.values.each do |command|
+    command_list.values.each do |command|
       @help_response << "#{command[:id]}: #{command[:description]}"
     end
     display(@help_response)
@@ -42,7 +47,20 @@ class Character < ApplicationRecord
     return room.characters - [self]
   end
 
-  def teleport(destination)
+  def teleport(arguments=[])
+    # error handling
+    if(arguments.empty?)
+      display("A destination must be provided.")
+      return
+    end
+    destination_id = arguments.first
+    room = Room.find_by(id: destination_id)
+    if(room.empty?)
+      display("The destination is invalid.")
+      return
+    end
+
+    # action
     other_characters.each{|oc| oc.display("#{name} disppears in a flash of light.")}
     self.room = destination
     self.save!
@@ -66,15 +84,24 @@ class Character < ApplicationRecord
     end
   end
 
-  def move(relative_direction=nil, *trash)
-    Rails.logger.info "TRYING TO MOVE #{relative_direction}"
-    if(relative_direction && Room::valid_directions.include?(relative_direction.to_i))
-      relative_direction = relative_direction.to_i
-      absolute_direction = DirectionLogic.get_absolute_direction_from_relative_direction(self.facing, relative_direction)
-      absolute_move(absolute_direction)
+  def move(arguments=[])
+    # error handling
+    if(arguments.empty?)
+      # default direction is forward
+      relative_direction = 0
     else
-      display("You must supply a valid direction.")
+      relative_direction = arguments.first.to_i
     end
+
+    if(!DirectionLogic.valid_directions.include?(direction))
+      display("That's not a valid direction")
+      return
+    end
+
+    absolute_direction = DirectionLogic.get_absolute_direction_from_relative_direction(
+      self.facing, relative_direction
+    )
+    absolute_move(absolute_direction)
   end
 
   def name
@@ -88,27 +115,44 @@ class Character < ApplicationRecord
     if(other_characters.present?)
       seen << "Characters here: "+ other_characters.map(&:id).join(", ")
     end
-    exits_list = room.exits.map do |absolute_direction|
-      "#{DirectionLogic.perspective_name(self.facing, absolute_direction)} [#{DirectionLogic.get_name_from_absolute_direction(absolute_direction)}]"
-    end
     seen << "You are facing #{self.facing}"
-    seen << ("Visible exits: "+exits_list.join(", "))
+    seen << visible_exits
     return seen
   end
 
-  def turn_left
-    self.facing = (self.facing - 2)%6 + 1
-    self.save!
+  def visible_exits
+    exits_list = room.exits.map do |absolute_direction|
+      "#{DirectionLogic.perspective_name(self.facing, absolute_direction)} [#{DirectionLogic.get_name_from_absolute_direction(absolute_direction)}]"
+    end
+    "Visible exits: "+exits_list.join(", ")
   end
 
-  def turn_right
-    self.facing = (self.facing)%6 + 1
+  def turn(arguments=[])
+    if(arguments.empty?)
+      change_direction = 3
+    else
+      change_direction = arguments.first.to_i
+    end
+    if(1 == change_direction)
+      display("You are already facing forward.")
+      return
+    end
+    if(!DirectionLogic.valid_directions.include?(change_direction))
+      display("#{change_direction} is not a valid direction.")
+      return
+    end
+    self.facing=DirectionLogic.get_rotation(self.facing, change_direction)
     self.save!
-  end
-
-  def turn(relative_direction)
-    self.facing=relative_direction;
-    self.save!
+    messages = []
+    if(2==change_direction)
+      messages << "You turned right."
+    elsif(3==change_direction)
+      messages << "You turned around."
+    elsif(4==change_direction)
+      messages << "You turned left."
+    end
+    messages << visible_exits
+    display(messages)
   end
 
   def look

@@ -13,8 +13,8 @@ class Commander < ApplicationRecord
         subordinate.send(match[:method])
       end
     else
+      subordinate.display("Invalid Command for Character #{subordinate.id}: #{primary} #{components.join(" ")}")
       return false
-      subordinate.display("Invalid Command Character #{subordinate.id}: #{primary} #{components.join(" ")}")
     end
   end
 end

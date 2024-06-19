@@ -37,17 +37,31 @@ x Do not allow user to login while already logged into an account
 x When an account is created, attach it to a new observer and commander attached to a new character
 x Make channels observer and commander specific and only broadcast and receive messages from above responses to appropriate observers and commanders
 
-PART 3: TEST, REVIEW, FIX - CIRCUIT 1
+PART 3: TEST, REVIEW, FIX 1
 Does all that stuff work? Does it feel right? If not, let's do a round of changing it.
-Change hex system to a cardinal coordinate system (should be pretty easy since it's barely really hex)
+x Change hex system to a cardinal coordinate system (should be pretty easy since it's barely really hex)
+x Add room names for ease of reference
+x Figure out why not displaying look actions
+x Figure out why "help" command isn't working.
+x Add ability to turn by command
+x Figure out why invalid commands give no response instead of an invalid command message
+Figure out why we aren't always getting our session display.
+Reset directions to have 0 be north instead of 1, simplify some of the math. Update direction and character logic.
+Fix problem where adding additional arguments throws errors
+Add error handling for all invalid commands
+Reorganize DEVPLAN doc
 
 Part 4: UI IMPROVEMENTS
 Add elements to track current status
 Add scroll and removal of old elements from display area
 Display commands and who command was sent to.
+Add the option to provide meta information for text messages, so some can be given special features (like putting actions taken in a different color from things observed)
+require or allow input of string names for directional commands instead of numbers
 
 Part 5: STARTING ON GAME MECHANICS
 Decide what to do!
+Add non-character objects, maybe?
+Add an inventory? Do we even WANT players to have an inventory? Maybe carts? Objects with inventories instead of players, and players just have hands?
 
 
 PART X-LATER: LOGGING AND HISTORY
@@ -55,3 +69,9 @@ Give each character a name
 Make sure characters using web interface receive updates of other characters moving in and out of room
 Whenever a message is received by an observer, save it in addition to displaying it. Or something like that. Figure out how this should work, so when a person logs in they can see what they missed if they want. Message history for that observer.
 Also track commands processed by commanders.
+
+PART X-LATER: UI IMPROVEMENTS 2
+Add ability to add meta-information to individual words, so interactables can be marked as notable and players can do things like click on them to look at them.
+
+PART X-LATER: STRUCTURAL IMPROVEMENTS 1
+Move more command processing logic out of the character and into the commander

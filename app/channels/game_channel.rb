@@ -32,6 +32,7 @@ class GameChannel < ApplicationCable::Channel
 
     # Pass any other commands to the account
     if(@current_account.present? && @current_account.commanders.present?)
+      # TODO: Be able to target which commander to send this to
       @current_account.commanders.first.process(message.shift, message)
       return
     end
@@ -106,7 +107,6 @@ class GameChannel < ApplicationCable::Channel
     if(account.errors.present?)
       session_broadcast "No."
     else
-      @current_account = account
       session_broadcast "New account created: #{@current_account.name}"
     end
   end
