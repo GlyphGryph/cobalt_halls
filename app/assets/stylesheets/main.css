@@ -15,20 +15,46 @@ body{
     margin: 0px;
     padding: 1rem;
     background-color: #444;
+    display: flex;
+    flex-direction: row;
+
+    #status-bar{
+      border: 0.2rem solid black;
+      border-left:0px;
+      border-radius: 0rem 1rem 1rem 0rem;
+      background-color: #EEE;
+      flex-grow: 1;
+      padding: 1rem;
+    }
+
     #game-interface{
       box-sizing: border-box;
-      width: 100%;
       height: 100%;
       background-color: #FFF;
       border: 0.2rem solid black;
-      border-radius: 1rem;
+      border-radius: 1rem 0rem 0rem 1rem;
       padding: 1rem;
       position: relative;
+      flex-grow: 2;
+      display: flex;
+      flex-direction: column;
+
+      #main-screen-container{
+        position: relative;
+        overflow-y: scroll;
+        flex-grow: 1;
+        box-sizing: border-box;
+        margin-bottom: 1rem;
+        padding: 0px;
+        
+        #main-screen{
+        }
+      }
 
       #command-box{
         display: flex;
-        position: absolute;
         box-sizing: border-box;
+        height: 2.5rem;
         bottom: 0px;
         left: 0px;
         width: 100%;

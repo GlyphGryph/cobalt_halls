@@ -6,6 +6,38 @@ The powers themselves will be (somewhat indirectly) controlled by those players 
 
 Gameplan:
 
+Part 4: UI IMPROVEMENTS
+x Add elements to track current status
+x Add scroll to display area
+x Add js hooks for logging in and out to update appropriate elements
+Add the option to provide meta information for text messages, so some can be given special features (like putting actions taken in a different color from things observed)
+Display commands and who command was sent to.
+Require or allow input of string names for directional commands instead of numbers
+
+Part 5: STARTING ON GAME MECHANICS
+Decide what to do!
+Add non-character objects, maybe?
+Add an inventory? Do we even WANT players to have an inventory? Maybe carts? Objects with inventories instead of players, and players just have hands?
+
+PART X-LATER: LOGGING AND HISTORY
+Give each character a name
+Make sure characters using web interface receive updates of other characters moving in and out of room
+Whenever a message is received by an observer, save it in addition to displaying it. Or something like that. Figure out how this should work, so when a person logs in they can see what they missed if they want. Message history for that observer.
+Also track commands processed by commanders.
+
+PART X-LATER: UI IMPROVEMENTS 2
+Add ability to add meta-information to individual words, so interactables can be marked as notable and players can do things like click on them to look at them.
+Older elements removed over time.
+Stop right bar from changing in size when updated
+
+PART X-LATER: STRUCTURAL IMPROVEMENTS 1
+Move more command processing logic out of the character and into the commander
+
+PART X-LATER: TEST, REVIEW, FIX 2
+Figure out why we aren't always getting our session display.
+
+==== FINISHED SECTIONS ====
+
 SECTION 1: BASIC FRAMEWORK
 PART 0: SETUP
 x Get hooked up to git
@@ -45,34 +77,10 @@ x Figure out why not displaying look actions
 x Figure out why "help" command isn't working.
 x Add ability to turn by command
 x Figure out why invalid commands give no response instead of an invalid command message
-Figure out why we aren't always getting our session display.
 x Reset directions to have 0 be north instead of 1, simplify some of the math. Update direction and character logic.
 x Fix problem where adding additional arguments throws errors
-Fix error when moving forward with no args
+x Fix error when moving forward with no args
 x Add error handling for all invalid commands
-Reorganize DEVPLAN doc to put finished parts below break
+x Registering a second account Test2 fails, fix it
+x Reorganize DEVPLAN doc to put finished parts below break
 
-Part 4: UI IMPROVEMENTS
-Add elements to track current status
-Add scroll and removal of old elements from display area
-Display commands and who command was sent to.
-Add the option to provide meta information for text messages, so some can be given special features (like putting actions taken in a different color from things observed)
-require or allow input of string names for directional commands instead of numbers
-
-Part 5: STARTING ON GAME MECHANICS
-Decide what to do!
-Add non-character objects, maybe?
-Add an inventory? Do we even WANT players to have an inventory? Maybe carts? Objects with inventories instead of players, and players just have hands?
-
-
-PART X-LATER: LOGGING AND HISTORY
-Give each character a name
-Make sure characters using web interface receive updates of other characters moving in and out of room
-Whenever a message is received by an observer, save it in addition to displaying it. Or something like that. Figure out how this should work, so when a person logs in they can see what they missed if they want. Message history for that observer.
-Also track commands processed by commanders.
-
-PART X-LATER: UI IMPROVEMENTS 2
-Add ability to add meta-information to individual words, so interactables can be marked as notable and players can do things like click on them to look at them.
-
-PART X-LATER: STRUCTURAL IMPROVEMENTS 1
-Move more command processing logic out of the character and into the commander

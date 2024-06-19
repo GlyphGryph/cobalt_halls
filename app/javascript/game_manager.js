@@ -14,10 +14,16 @@ game.channel = game.cable.subscriptions.create({ channel: "GameChannel"}, {
     if("display" == data.action){
       const main_screen = document.getElementById('main-screen');
       for(const message of data.messages){
-        var para = document.createElement("p");
+        let para = document.createElement("p");
         para.appendChild(document.createTextNode(message));
         main_screen.appendChild(para);
+        main_screen.scrollIntoView(false);
       }
+    }else if("status-update" == data.action){
+      let account_element = document.getElementById('account-status-text');
+      let character_element = document.getElementById('character-status-text');
+      account_element.innerHTML = data.account_name;
+      character_element.innerHTML = data.character_name;
     }else{
       console.log("Received some data:", data);
     }

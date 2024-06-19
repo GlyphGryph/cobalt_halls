@@ -10,6 +10,7 @@ class GameChannel < ApplicationCable::Channel
   def subscribed
     stream_from connection_channel
     session_broadcast "Welcome, user #{connection.session.id}!"
+    update_status
   end
 
   def unsubscribed
@@ -89,6 +90,7 @@ class GameChannel < ApplicationCable::Channel
     @current_account = result.first
     stream_from @current_account.observer.channel_id
     session_broadcast "Logged in as #{@current_account.name}"
+    update_status
     return
   end
 
@@ -99,6 +101,7 @@ class GameChannel < ApplicationCable::Channel
       stop_stream_from @current_account.observer.channel_id
       @current_account = nil
       session_broadcast "Logged out"
+      update_status
     end
   end
 
@@ -107,7 +110,7 @@ class GameChannel < ApplicationCable::Channel
     if(account.errors.present?)
       session_broadcast "No."
     else
-      session_broadcast "New account created: #{@current_account.name}"
+      session_broadcast "New account created: #{account.name}"
     end
   end
 
@@ -116,6 +119,14 @@ class GameChannel < ApplicationCable::Channel
       session_broadcast "Not logged in."
     else
       session_broadcast "Logged in as #{@current_account.name}. Commanders are #{@current_account.commanders}. Observer is #{@current_account.observer}. Characters are #{@current_account.characters}"
+    end
+  end
+
+  def update_status
+    if(@current_account.present?)
+      ActionCable.server.broadcast(connection_channel, {action: "status-update", account_name: @current_account.name, character_name: @current_account.characters.first.name})
+    else
+      ActionCable.server.broadcast(connection_channel, {action: "status-update", account_name: "Not logged in.", character_name: "No character selected."})
     end
   end
 end
