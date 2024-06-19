@@ -3,29 +3,22 @@ class DirectionLogic
   # "relative_direction" refers to direction relative to a given facing, with 1 being "Forward"
   @direction_name_mappings = {
     1 => "North (1)",
-    2 => "Neast (2)",
-    3 => "Seast (3)",
-    4 => "South (4)",
-    5 => "Swest (5)",
-    6 => "Nwest (6)"
+    2 => "East (2)",
+    3 => "South (3)",
+    4 => "West (4)"
   }
   @direction_name_to_number_mappings = @direction_name_mappings.invert
   @relative_direction_name_mappings = {
     1 => "Ahead (1)",
-    2 => "Ahead Right (2)",
-    3 => "Behind Right (3)",
-    4 => "Behind (4)",
-    5 => "Behind Left (5)",
-    6 => "Ahead Left (6)"
-
+    2 => "Right (2)",
+    3 => "Behind (3)",
+    4 => "Left (4)"
   }
   @anterior_mappings = {
-    1 => 4,
-    2 => 5,
-    3 => 6,
-    4 => 1,
-    5 => 2,
-    6 => 3
+    1 => 3,
+    2 => 4,
+    3 => 1,
+    4 => 2
   }
   
   def self.get_anterior(direction)
@@ -45,11 +38,11 @@ class DirectionLogic
   end
 
   def self.get_absolute_direction_from_relative_direction(facing, relative_direction)
-    return (facing+relative_direction-2)%6+1
+    return (facing+relative_direction-2)%4+1
   end
 
   def self.get_relative_direction_from_absolute_direction(facing, absolute_direction)
-    return (absolute_direction-facing)%6+1
+    return (absolute_direction-facing)%4+1
   end
 
   def self.perspective_name(facing, absolute_direction)

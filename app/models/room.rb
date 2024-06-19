@@ -2,7 +2,14 @@ class Room < ApplicationRecord
   has_many :characters
   has_many :start_room_connections, class_name: "RoomConnection", foreign_key: 'start_room_id', dependent: :destroy
   has_many :end_room_connections, class_name: "RoomConnection", foreign_key: "end_room_id", dependent: :destroy
-  @@valid_directions = [1,2,3,4,5,6]
+  # 1 - North
+  # 2 - East
+  # 3 - South
+  # 4 - West
+  # 5 - Up
+  # 6 - Down
+  # Directions can also be combined, with Up and Down first
+  @@valid_directions = [1,2,3,4,5,6,51,52,53,54,61,62,63,64]
 
   def self.valid_directions
     @@valid_directions
