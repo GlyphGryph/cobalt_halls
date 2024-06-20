@@ -3,33 +3,30 @@ class Character < ApplicationRecord
   has_and_belongs_to_many :observers
   has_many :commanders, dependent: :destroy
  
-  def self.command_list
-    @@command_list ||= {
-      "look" => {
-        id: "look",
-        description: "Shows contents of room",
-        method: :look
-      },
-      "move" => {
-        id: "move",
-        description: "Requires a direction, 'move [direction]'. Moves character through an exit to a new area.",
-        method: :move
-      },
-      "turn" => {
-        id: "turn",
-        description: "Change facing.",
-        method: :turn
-      },
-      "help" => {
-        id: "help",
-        description: "Lists valid commands for character",
-        method: :help
-      }
+  def self.commands
+    return @command_list if defined?(@command_list)
+    @command_list = {}
+    @command_list["look"] = {
+      description: "Shows contents of room by just typing 'look', or examine an object by typing 'look [object]'. Use 'look self' to examine your current state.",
+      method: :look
     }
+    @command_list["move"] = {
+      description: "Move forward, or in a given direction, 'move [direction]'. Moves character through an exit to a new area. Valid directions are 'forward' (or 'f'), 'right' (or 'r'), 'left' (or 'l'), and 'back' (or 'b')",
+      method: :move
+    }
+    @command_list["turn"] = {
+      description: "Change facing.",
+      method: :turn
+    }
+    @command_list["help"] = {
+      description: "Lists valid commands for character",
+      method: :help
+    }
+    return @command_list
   end
 
-  def command_list
-    Character.command_list
+  def commands
+    Character.commands
   end
     
 
@@ -37,7 +34,7 @@ class Character < ApplicationRecord
     return @help_response if @help_response
     @help_response = []
     @help_response << "Valid commands"
-    command_list.values.each do |command|
+    commands.values.each do |command|
       @help_response << "#{command[:id]}: #{command[:description]}"
     end
     display(@help_response)
@@ -88,10 +85,12 @@ class Character < ApplicationRecord
     # error handling
     if(arguments.empty?)
       # default direction is forward
-      relative_direction = 0
+      relative_direction = 'f'
     else
-      relative_direction = arguments.first.to_i
+      relative_direction = arguments.first
     end
+
+    relative_direction = DirectionLogic.get_direction_from_string(relative_direction)
 
     if(!DirectionLogic.valid_directions.include?(relative_direction))
       display("That's not a valid direction")
@@ -128,19 +127,27 @@ class Character < ApplicationRecord
   end
 
   def turn(arguments=[])
+    # error handling
     if(arguments.empty?)
-      change_direction = 2
+      # default direction is forward
+      change_direction = 'b'
     else
-      change_direction = arguments.first.to_i
+      change_direction = arguments.first
     end
+
+    change_direction = DirectionLogic.get_direction_from_string(change_direction)
+
+    if(!DirectionLogic.valid_directions.include?(change_direction))
+      display("That's not a valid direction")
+      return
+    end
+
+
     if(0 == change_direction)
       display("You are already facing forward.")
       return
     end
-    if(!DirectionLogic.valid_directions.include?(change_direction))
-      display("#{change_direction} is not a valid direction.")
-      return
-    end
+
     self.facing=DirectionLogic.get_rotation(self.facing, change_direction)
     self.save!
     messages = []

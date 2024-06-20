@@ -10,14 +10,14 @@ Part 4: UI IMPROVEMENTS
 x Add elements to track current status
 x Add scroll to display area
 x Add js hooks for logging in and out to update appropriate elements
-Add the option to provide meta information for text messages, so some can be given special features (like putting actions taken in a different color from things observed)
-Display commands and who command was sent to.
-Require or allow input of string names for directional commands instead of numbers
+x Require or allow input of string names for directional commands instead of numbers
+x figure out why inputs are triggering six times
 
 Part 5: STARTING ON GAME MECHANICS
 Decide what to do!
 Add non-character objects, maybe?
 Add an inventory? Do we even WANT players to have an inventory? Maybe carts? Objects with inventories instead of players, and players just have hands?
+Add ability to look at objects (and other players)
 
 PART X-LATER: LOGGING AND HISTORY
 Give each character a name
@@ -29,6 +29,9 @@ PART X-LATER: UI IMPROVEMENTS 2
 Add ability to add meta-information to individual words, so interactables can be marked as notable and players can do things like click on them to look at them.
 Older elements removed over time.
 Stop right bar from changing in size when updated
+Add the option to provide meta information for text messages, so some can be given special features (like putting actions taken in a different color from things observed)
+Display commands and who command was sent to.
+Implement Aliases ("go" -> "move")
 
 PART X-LATER: STRUCTURAL IMPROVEMENTS 1
 Move more command processing logic out of the character and into the commander

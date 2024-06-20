@@ -2,23 +2,34 @@ class DirectionLogic
   # "direction" or "absolute_direction" refers to absolute direction, 1 through 6, with 1 being "North"
   # "relative_direction" refers to direction relative to a given facing, with 1 being "Forward"
   @direction_name_mappings = {
-    0 => "North (0)",
-    1 => "East (1)",
-    2 => "South (2)",
-    3 => "West (3)"
+    0 => "North",
+    1 => "East",
+    2 => "South",
+    3 => "West"
   }
   @direction_name_to_number_mappings = @direction_name_mappings.invert
   @relative_direction_name_mappings = {
-    0 => "Ahead (0)",
-    1 => "Right (1)",
-    2 => "Behind (2)",
-    3 => "Left (3)"
+    0 => "Forward",
+    1 => "Right",
+    2 => "Back",
+    3 => "Left"
   }
   @anterior_mappings = {
     0 => 2,
     1 => 3,
     2 => 0,
     3 => 1
+  }
+
+  @string_to_direction_mappings = {
+    'f' => 0,
+    'forward' => 0,
+    'r' => 1,
+    'right' => 1,
+    'b' => 2,
+    'back' => 2,
+    'l' => 3,
+    'left' => 3
   }
 
   @valid_directions = [0,1,2,3]
@@ -34,8 +45,8 @@ class DirectionLogic
     return @direction_name_mappings[direction]
   end
 
-  def self.get_direction_from_name(name)
-    return @direction_name_to_number_mappings[name]
+  def self.get_direction_from_string(input)
+    return @string_to_direction_mappings[input.downcase]
   end
 
   def self.get_name_from_relative_direction(relative_direction)

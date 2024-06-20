@@ -25,6 +25,7 @@ class Observer < ApplicationRecord
   end
 
   def display(messages, source=nil)
+    Rails.logger.info("Displaying in observer 54")
     messages = Array(messages)
     lead = "WORLD"
     lead = source.name if(source.present?)

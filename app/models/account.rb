@@ -7,9 +7,6 @@ class Account < ApplicationRecord
   
   def characters
     characters = observer.characters
-    commanders.each do |commander|
-      characters << commander.subordinate
-    end
     return characters
   end
 

@@ -5,7 +5,7 @@ class Commander < ApplicationRecord
   def process(primary, components=[])
     Rails.logger.info("COMMAND ISSUED || PRIMARY COMMAND: #{primary}, ARGUMENTS: #{components}")
     primary = primary.downcase
-    match = subordinate.command_list[primary]
+    match = subordinate.commands[primary]
     if(match.present?)
       if(components.present?)
         subordinate.send(match[:method], *components)

@@ -17,7 +17,7 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    session_broadcast "Received message: #{data["body"]}"
+    Rails.logger.info "Received message: #{data}"
     message = data["body"].split(" ")
     
     if message.empty?
