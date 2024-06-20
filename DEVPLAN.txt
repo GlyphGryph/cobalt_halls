@@ -6,13 +6,6 @@ The powers themselves will be (somewhat indirectly) controlled by those players 
 
 Gameplan:
 
-Part 4: UI IMPROVEMENTS
-x Add elements to track current status
-x Add scroll to display area
-x Add js hooks for logging in and out to update appropriate elements
-x Require or allow input of string names for directional commands instead of numbers
-x figure out why inputs are triggering six times
-
 Part 5: STARTING ON GAME MECHANICS
 Decide what to do!
 Add non-character objects, maybe?
@@ -86,4 +79,12 @@ x Fix error when moving forward with no args
 x Add error handling for all invalid commands
 x Registering a second account Test2 fails, fix it
 x Reorganize DEVPLAN doc to put finished parts below break
+
+Part 4: UI IMPROVEMENTS
+x Add elements to track current status
+x Add scroll to display area
+x Add js hooks for logging in and out to update appropriate elements
+x Require or allow input of string names for directional commands instead of numbers
+x figure out why inputs are triggering six times
+
 
