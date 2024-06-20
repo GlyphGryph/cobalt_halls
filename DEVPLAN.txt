@@ -8,9 +8,21 @@ Gameplan:
 
 Part 5: STARTING ON GAME MECHANICS
 Decide what to do!
-Add non-character objects, maybe?
-Add an inventory? Do we even WANT players to have an inventory? Maybe carts? Objects with inventories instead of players, and players just have hands?
-Add ability to look at objects (and other players)
+Add objects to rooms
+Add ability to look at objects
+Add ability to look at players
+Add ability to describe yourself
+Add ability to 'say' things
+Add ability to pick up an object
+Add seed for slightly more expanded default room layout and some default accounts and stuff
+Add "locked doors" to connections. The lock is accessible from both sides, but may have different requirements - for example, one side requiring a key and the other side not requiring a key to lock or unlock it.
+Add ability to "use" objects in room and neighbour connections - for example, opening a door, unlocking a door, flipping a rock.
+Allow interacting with objects to change their description. For example, flipped rock shows different image.
+Add ability to "use" held objects - including how this fails on objects with no use. Using a key on a locked door unlocks the door.
+Add ability to "eat" held objects - including how this fails on inedible objects. This destroys the object.
+Have "looking" at an object reveal valid verbs for that object
+Griffin room request: "Short hallway with six doors, three on each side. You come through a seventh door at the start of the hallway. A door at the other end of the hallway goes to a room with beds. There is a key on the ground in the middle. You'll need to use the key to get through a door later."
+
 
 PART X-LATER: LOGGING AND HISTORY
 Give each character a name
