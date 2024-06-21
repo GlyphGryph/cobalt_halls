@@ -7,7 +7,6 @@ The powers themselves will be (somewhat indirectly) controlled by those players 
 Gameplan:
 
 Part 5: STARTING ON GAME MECHANICS
-Decide what to do!
 Add objects to rooms
 Add ability to look at objects
 Add ability to look at players
