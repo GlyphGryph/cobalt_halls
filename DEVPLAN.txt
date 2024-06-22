@@ -12,10 +12,12 @@ x Add ability to see objects in rooms
 Add ability to look at objects
 Add ability to look at players (including "self")
 x Add objects to players
+Add ability to pick up an object
 Add ability to see what a player is holding when looking at a player
+Add ability to drop an object
+Add broadcasts for the pickup and drop actions
 Add ability to describe yourself and add this description to what is displayed when looked at
 Add ability to 'say' things
-Add ability to pick up an object
 Add seed for slightly more expanded default room layout and some default accounts and stuff
 Add "locked doors" to connections. The lock is accessible from both sides, but may have different requirements - for example, one side requiring a key and the other side not requiring a key to lock or unlock it.
 Add ability to "use" objects in room and neighbour connections - for example, opening a door, unlocking a door, flipping a rock.
