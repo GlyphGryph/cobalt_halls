@@ -2,6 +2,9 @@ class Room < ApplicationRecord
   has_many :characters
   has_many :start_room_connections, class_name: "RoomConnection", foreign_key: 'start_room_id', dependent: :destroy
   has_many :end_room_connections, class_name: "RoomConnection", foreign_key: "end_room_id", dependent: :destroy
+  belongs_to :container, optional: true
+
+  before_create :add_container
 
   def exits
     exits = []
@@ -31,5 +34,10 @@ class Room < ApplicationRecord
 
   def name
     self.id
+  end
+
+private
+  def add_container
+    self.container = Container.create!
   end
 end

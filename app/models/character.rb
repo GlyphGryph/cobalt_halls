@@ -1,8 +1,11 @@
 class Character < ApplicationRecord
   belongs_to :room
-  has_and_belongs_to_many :observers
+  has_and_belongs_to_many :observers, dependent: :destroy
   has_many :commanders, dependent: :destroy
- 
+  belongs_to :hands, :class_name => 'Container', :foreign_key => 'container_id', dependent: :destroy, optional: true
+
+  before_create :add_hands
+
   def self.commands
     return @command_list if defined?(@command_list)
     @command_list = {}
@@ -179,5 +182,10 @@ class Character < ApplicationRecord
     observers.each do |observer|
       observer.display(messages, self)
     end
+  end
+
+private
+  def add_hands
+    self.hands = Container.create!
   end
 end

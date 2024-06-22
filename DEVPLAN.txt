@@ -7,7 +7,7 @@ The powers themselves will be (somewhat indirectly) controlled by those players 
 Gameplan:
 
 Part 5: STARTING ON GAME MECHANICS
-Add objects to rooms
+x Add objects to rooms
 Add ability to look at objects
 Add ability to look at players
 Add ability to describe yourself
@@ -38,7 +38,10 @@ Display commands and who command was sent to.
 Implement Aliases ("go" -> "move")
 
 PART X-LATER: STRUCTURAL IMPROVEMENTS 1
-Move more command processing logic out of the character and into the commander
+Create a standard, genericized format for "actions" so they are defined in a place apart from the normal character logic in a way that works for anything that might execute them
+- can be done by player characters, generic kobolds, npcs, and maybe even other things, so 
+- can easily drop or add specific valid commands to a specific commanded object (perhaps via commander instance itself?)
+- 
 
 PART X-LATER: TEST, REVIEW, FIX 2
 Figure out why we aren't always getting our session display.

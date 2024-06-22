@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_19_104234) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_21_222008) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -32,6 +32,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_19_104234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "facing", default: 1, null: false
+    t.bigint "container_id", null: false
+    t.index ["container_id"], name: "index_characters_on_container_id"
     t.index ["room_id"], name: "index_characters_on_room_id"
   end
 
@@ -48,6 +50,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_19_104234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_commanders_on_character_id"
+  end
+
+  create_table "containers", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "grubs", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "container_id", null: false
+    t.index ["container_id"], name: "index_grubs_on_container_id"
   end
 
   create_table "observers", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
@@ -72,9 +88,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_19_104234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.bigint "container_id", null: false
+    t.index ["container_id"], name: "index_rooms_on_container_id"
   end
 
   add_foreign_key "accounts", "observers"
+  add_foreign_key "characters", "containers"
   add_foreign_key "characters", "rooms"
   add_foreign_key "commanders", "characters"
+  add_foreign_key "grubs", "containers"
+  add_foreign_key "rooms", "containers"
 end
