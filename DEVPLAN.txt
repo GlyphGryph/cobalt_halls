@@ -8,9 +8,12 @@ Gameplan:
 
 Part 5: STARTING ON GAME MECHANICS
 x Add objects to rooms
+x Add ability to see objects in rooms
 Add ability to look at objects
-Add ability to look at players
-Add ability to describe yourself
+Add ability to look at players (including "self")
+x Add objects to players
+Add ability to see what a player is holding when looking at a player
+Add ability to describe yourself and add this description to what is displayed when looked at
 Add ability to 'say' things
 Add ability to pick up an object
 Add seed for slightly more expanded default room layout and some default accounts and stuff

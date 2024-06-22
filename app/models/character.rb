@@ -114,6 +114,9 @@ class Character < ApplicationRecord
     seen = []
     seen << (lead || "You look around the room...")
     seen << room.description
+    if(room.grubs.present?)
+      seen << "Items here: "+room.grubs.map(&:name).join(", ")
+    end
     if(other_characters.present?)
       seen << "Characters here: "+ other_characters.map(&:id).join(", ")
     end
@@ -179,6 +182,7 @@ class Character < ApplicationRecord
 
   def display(messages)
     messages = Array(messages)
+    Rails.logger.info "Displaying message: #{messages}"
     observers.each do |observer|
       observer.display(messages, self)
     end

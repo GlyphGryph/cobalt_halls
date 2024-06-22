@@ -3,6 +3,8 @@ class Room < ApplicationRecord
   has_many :start_room_connections, class_name: "RoomConnection", foreign_key: 'start_room_id', dependent: :destroy
   has_many :end_room_connections, class_name: "RoomConnection", foreign_key: "end_room_id", dependent: :destroy
   belongs_to :container, optional: true
+  has_many :grubs, through: :container
+  validates :description, presence: true
 
   before_create :add_container
 
