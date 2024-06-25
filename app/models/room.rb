@@ -39,7 +39,13 @@ class Room < ApplicationRecord
   end
 
   def find_contents(arguments=[])
-    self.container.grubs.detect{|grub| arguments.first == grub.key}
+    # find players
+    found = self.characters.detect{|character| arguments.first == character.key}
+    if(!found)
+     found =  self.container.grubs.detect{|grub| arguments.first == grub.key}
+    end
+
+    return found
   end
 
 private

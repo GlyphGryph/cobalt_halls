@@ -12,10 +12,10 @@ x Add ability to see objects in rooms
 x Add ability to look at objects
 x Add ability to look at players (including "self")
 x Add objects to players
-Add ability to pick up an object
-Add ability to see what a player is holding when looking at a player
-Add ability to drop an object
-Add broadcasts for the pickup and drop actions
+x Add ability to pick up an object
+x Add ability to see what a player is holding when looking at a player
+x Add ability to drop an object
+x Add broadcasts for the pickup and drop actions
 Add ability to describe yourself and add this description to what is displayed when looked at
 Add ability to 'say' things
 Add seed for slightly more expanded default room layout and some default accounts and stuff
@@ -52,10 +52,11 @@ PART X-LATER: STRUCTURAL IMPROVEMENTS 1
 Create a standard, genericized format for "actions" so they are defined in a place apart from the normal character logic in a way that works for anything that might execute them
 - can be done by player characters, generic kobolds, npcs, and maybe even other things, so 
 - can easily drop or add specific valid commands to a specific commanded object (perhaps via commander instance itself?)
-- 
+- create a "viewable" shared module with appropriate logic, and make sure every object has a firt and third person short and long description, and that they are called appropriately
 
 PART X-LATER: TEST, REVIEW, FIX 2
-Figure out why we aren't always getting our session display.
+Figure out why we aren't always getting our initial session details in display.
+Make sure model instances are always properly reloaded before commands work with them. Stale data has been... a problem.
 
 ==== FINISHED SECTIONS ====
 

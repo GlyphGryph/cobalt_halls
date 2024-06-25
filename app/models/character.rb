@@ -4,6 +4,7 @@ class Character < ApplicationRecord
   has_many :commanders, dependent: :destroy
   belongs_to :hands, :class_name => 'Container', :foreign_key => 'container_id', dependent: :destroy, optional: true
 
+
   before_create :add_hands
 
   def self.commands
@@ -21,6 +22,14 @@ class Character < ApplicationRecord
       description: "Change facing.",
       method: :turn
     }
+    @command_list["get"] = {
+      description: "Move an item to your inventory.",
+      method: :get
+    }
+    @command_list["drop"] = {
+      description: "Move an item out of your inventory",
+      method: :drop
+    }
     @command_list["help"] = {
       description: "Lists valid commands for character",
       method: :help
@@ -31,7 +40,10 @@ class Character < ApplicationRecord
   def commands
     Character.commands
   end
-    
+
+  def key
+    @key ||= "char#{self.id}"
+  end
 
   def help(arguments=[])
     return @help_response if @help_response
@@ -111,6 +123,7 @@ class Character < ApplicationRecord
   end
 
   def sees(lead=nil)
+    room.reload
     seen = []
     seen << (lead || "You look around the room...")
     seen << room.description
@@ -118,7 +131,7 @@ class Character < ApplicationRecord
       seen << "Items here: "+room.grubs.map{|grub| "#{grub.name} (#{grub.key})"}.join(", ")
     end
     if(other_characters.present?)
-      seen << "Characters here: "+ other_characters.map(&:id).join(", ")
+      seen << "Characters here: "+ other_characters.map(&:key).join(", ")
     end
     seen << "You are facing #{self.facing}"
     seen << visible_exits
@@ -192,16 +205,41 @@ class Character < ApplicationRecord
   end
 
   def find_contents(arguments=[])
-    Rails.logger.info "Looking for #{arguments.first}"
     self.hands.grubs.detect{|grub| arguments.first == grub.key}
   end
 
   def seen_as
+    self.reload
     seen = []
     seen << "Name: #{self.id}"
     seen << "Position: #{room.name}"
     seen << "Facing: #{self.facing}"
+    seen << "Has the following items: #{self.hands.grubs.map{|grub| "#{grub.name} (#{grub.key})"}.join(", ")}"
     return seen
+  end
+
+  def get(arguments=[])
+    found = self.room.find_contents(arguments)
+    if(found)
+      found.container = self.hands
+      found.save!
+      display("You get up the #{arguments.first}.")
+      other_characters.each{|oc| oc.display("#{name} gets the #{arguments.first}.")}
+    else
+      display("You couldn't find any #{arguments.first} to get.")
+    end
+  end
+
+  def drop(arguments=[])
+    found = self.find_contents(arguments)
+    if(found)
+      found.container = self.room.container
+      found.save!
+      display("You drop the #{arguments.first}.")
+      other_characters.each{|oc| oc.display("#{name} drops the #{arguments.first}.")}
+    else
+      display("You couldn't find any #{arguments.first} to get.")
+    end
   end
 
   def display(messages)

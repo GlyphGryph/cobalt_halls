@@ -3,6 +3,7 @@ class Commander < ApplicationRecord
   belongs_to :subordinate, class_name: :Character, foreign_key: "character_id"  
 
   def process(primary, components=[])
+    subordinate.reload
     Rails.logger.info("COMMAND ISSUED || PRIMARY COMMAND: #{primary}, ARGUMENTS: #{components}")
     primary = primary.downcase
     match = subordinate.commands[primary]
