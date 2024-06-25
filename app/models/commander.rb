@@ -8,7 +8,7 @@ class Commander < ApplicationRecord
     match = subordinate.commands[primary]
     if(match.present?)
       if(components.present?)
-        subordinate.send(match[:method], *components)
+        subordinate.send(match[:method], components)
       else
         subordinate.send(match[:method])
       end

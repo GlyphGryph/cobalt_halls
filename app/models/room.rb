@@ -38,6 +38,10 @@ class Room < ApplicationRecord
     self.id
   end
 
+  def find_contents(arguments=[])
+    self.container.grubs.detect{|grub| arguments.first == grub.key}
+  end
+
 private
   def add_container
     self.container = Container.create!

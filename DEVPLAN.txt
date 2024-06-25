@@ -9,8 +9,8 @@ Gameplan:
 Part 5: STARTING ON GAME MECHANICS
 x Add objects to rooms
 x Add ability to see objects in rooms
-Add ability to look at objects
-Add ability to look at players (including "self")
+x Add ability to look at objects
+x Add ability to look at players (including "self")
 x Add objects to players
 Add ability to pick up an object
 Add ability to see what a player is holding when looking at a player
@@ -41,6 +41,12 @@ Stop right bar from changing in size when updated
 Add the option to provide meta information for text messages, so some can be given special features (like putting actions taken in a different color from things observed)
 Display commands and who command was sent to.
 Implement Aliases ("go" -> "move")
+Implement key generation (3 kobolds in a room get keys "kob1", "kob2", and "kob3" for easy reference)
+Impement partial text matching
+Add context menu when clicking an interactable item in text window that gives options like "look", "pick up"
+Implement a physical navigation menu to right of command box that can handle moving, turning, looking.
+Restrict movement options to only valid exits, disable other buttons
+Implement an always visible inventory
 
 PART X-LATER: STRUCTURAL IMPROVEMENTS 1
 Create a standard, genericized format for "actions" so they are defined in a place apart from the normal character logic in a way that works for anything that might execute them

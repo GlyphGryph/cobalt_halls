@@ -115,7 +115,7 @@ class Character < ApplicationRecord
     seen << (lead || "You look around the room...")
     seen << room.description
     if(room.grubs.present?)
-      seen << "Items here: "+room.grubs.map(&:name).join(", ")
+      seen << "Items here: "+room.grubs.map{|grub| "#{grub.name} (#{grub.key})"}.join(", ")
     end
     if(other_characters.present?)
       seen << "Characters here: "+ other_characters.map(&:id).join(", ")
@@ -168,16 +168,40 @@ class Character < ApplicationRecord
     display(messages)
   end
 
-  def look
-    display(sees)
+  def look(arguments=[])
+    if(arguments.empty? || arguments.first == "room")
+      display(sees)
+      return
+    end
+
+    messages = []
+    if("self" == arguments.first)
+      messages << "You look at yourself."
+      messages.concat(self.seen_as)
+    elsif(found = self.find_contents(arguments))
+      # Check self contents (inventory) and display seen_as for any matches
+      messages.concat(found.seen_as)
+    elsif(found = room.find_contents(arguments))
+      # Check room contents (characters, exits, items) and display seen_as for any matches
+      messages.concat(found.seen_as)
+    else
+      messages << "Nothing found that matches '#{arguments}'"
+    end
+
+    display(messages)
   end
 
-  def look_self
+  def find_contents(arguments=[])
+    Rails.logger.info "Looking for #{arguments.first}"
+    self.hands.grubs.detect{|grub| arguments.first == grub.key}
+  end
+
+  def seen_as
     seen = []
     seen << "Name: #{self.id}"
     seen << "Position: #{room.name}"
     seen << "Facing: #{self.facing}"
-    display(seen)
+    return seen
   end
 
   def display(messages)
