@@ -140,16 +140,16 @@ class Character < ApplicationRecord
     if(other_characters.present?)
       seen << "Characters here: "+ other_characters.map{|character| "#{character.name} (#{character.key})"}.join(", ")
     end
-    seen << "You are facing #{self.facing}"
-    seen << visible_exits
+    seen.concat(visible_exits)
     return seen
   end
 
   def visible_exits
-    exits_list = room.exits.map do |absolute_direction|
-      "#{DirectionLogic.perspective_name(self.facing, absolute_direction)} [#{DirectionLogic.get_name_from_absolute_direction(absolute_direction)}]"
+    messages = ["Visible exits: "]
+    exits_list = room.exits.map do |portal|
+      messages << "#{portal.description} to the #{DirectionLogic.perspective_name(self.facing, portal.direction)}"
     end
-    "Visible exits: "+exits_list.join(", ")
+    messages
   end
 
   def turn(arguments=[])
@@ -184,7 +184,7 @@ class Character < ApplicationRecord
     elsif(3==change_direction)
       messages << "You turned left."
     end
-    messages << visible_exits
+    messages.concat(visible_exits)
     display(messages)
   end
 

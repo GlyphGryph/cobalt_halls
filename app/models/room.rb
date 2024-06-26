@@ -5,25 +5,27 @@ class Room < ApplicationRecord
   belongs_to :container, optional: true
   has_many :grubs, through: :container
   validates :description, presence: true
+  validates :name, presence: true
 
   before_create :add_container
 
   def exits
-    exits = []
+    portals = []
     start_room_connections.each do |connection|
-      exits << connection.start_room_direction
+      portals << OpenStruct.new({direction: connection.start_room_direction, description: connection.description})
     end
-    return exits
+    return portals
   end
 
-  def connect(direction, target_room)
+  def connect(direction, target_room, description)
     errors = []
     op_direction = DirectionLogic.get_anterior(direction)
     start_connection = RoomConnection.create(
       start_room: self,
       start_room_direction: direction,
       end_room: target_room,
-      end_room_direction: op_direction
+      end_room_direction: op_direction,
+      description: description
     )
     errors << start_connection.errors
     end_connection = RoomConnection.create(
@@ -32,10 +34,6 @@ class Room < ApplicationRecord
       end_room: self,
       end_room_direction: direction
     )
-  end
-
-  def name
-    self.id
   end
 
   def find_contents(arguments=[])

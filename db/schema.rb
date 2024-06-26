@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_26_024703) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_26_210108) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -77,9 +77,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_024703) do
     t.integer "end_room_id", null: false
     t.integer "start_room_direction", null: false
     t.integer "end_room_direction", null: false
-    t.text "transition_message", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
     t.index ["end_room_id"], name: "index_room_connections_on_end_room_id"
     t.index ["start_room_id"], name: "index_room_connections_on_start_room_id"
   end
