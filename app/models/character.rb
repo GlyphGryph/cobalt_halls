@@ -34,6 +34,10 @@ class Character < ApplicationRecord
       description: "Describe yourself.",
       method: :describe
     }
+    @command_list["say"] = {
+      description: "Say something.",
+      method: :say
+    }
     @command_list["help"] = {
       description: "Lists valid commands for character",
       method: :help
@@ -257,6 +261,16 @@ class Character < ApplicationRecord
     Rails.logger.info "Displaying message: #{messages}"
     observers.each do |observer|
       observer.display(messages, self)
+    end
+  end
+
+  def say(arguments = [])
+    if(arguments.empty?)
+      display("You said nothing.")
+      other_characters.each{|oc| oc.display("#{name.capitalize} says nothing.")}
+    else
+      display(%{You say "#{arguments.join(" ")}"})
+      other_characters.each{|oc| oc.display(%{#{oc.name.capitalize} says "#{arguments.join(" ")}"})}
     end
   end
 
