@@ -4,7 +4,7 @@ class Character < ApplicationRecord
   has_many :commanders, dependent: :destroy
   belongs_to :hands, :class_name => 'Container', :foreign_key => 'container_id', dependent: :destroy, optional: true
 
-
+  before_validation :set_description
   before_create :add_hands
 
   def self.commands
@@ -29,6 +29,10 @@ class Character < ApplicationRecord
     @command_list["drop"] = {
       description: "Move an item out of your inventory",
       method: :drop
+    }
+    @command_list["describe"] = {
+      description: "Describe yourself.",
+      method: :describe
     }
     @command_list["help"] = {
       description: "Lists valid commands for character",
@@ -119,11 +123,10 @@ class Character < ApplicationRecord
   end
 
   def name
-    id.to_s
+    description || "an unknown creature"
   end
 
   def sees(lead=nil)
-    room.reload
     seen = []
     seen << (lead || "You look around the room...")
     seen << room.description
@@ -131,7 +134,7 @@ class Character < ApplicationRecord
       seen << "Items here: "+room.grubs.map{|grub| "#{grub.name} (#{grub.key})"}.join(", ")
     end
     if(other_characters.present?)
-      seen << "Characters here: "+ other_characters.map(&:key).join(", ")
+      seen << "Characters here: "+ other_characters.map{|character| "#{character.name} (#{character.key})"}.join(", ")
     end
     seen << "You are facing #{self.facing}"
     seen << visible_exits
@@ -190,6 +193,7 @@ class Character < ApplicationRecord
     messages = []
     if("self" == arguments.first)
       messages << "You look at yourself."
+      messages << "This creature is #{self.description}"
       messages.concat(self.seen_as)
     elsif(found = self.find_contents(arguments))
       # Check self contents (inventory) and display seen_as for any matches
@@ -209,8 +213,8 @@ class Character < ApplicationRecord
   end
 
   def seen_as
-    self.reload
     seen = []
+    seen << "This is a #{self.description}"
     seen << "Name: #{self.id}"
     seen << "Position: #{room.name}"
     seen << "Facing: #{self.facing}"
@@ -242,6 +246,12 @@ class Character < ApplicationRecord
     end
   end
 
+  def describe(arguments=[])
+    self.description = arguments.join(" ")
+    self.save!
+    display(["Your new description is...",self.description])
+  end
+
   def display(messages)
     messages = Array(messages)
     Rails.logger.info "Displaying message: #{messages}"
@@ -253,5 +263,9 @@ class Character < ApplicationRecord
 private
   def add_hands
     self.hands = Container.create!
+  end
+  
+  def set_description
+    self.description ||= "a kobold"
   end
 end

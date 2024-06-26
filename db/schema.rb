@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_21_222008) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_26_024703) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_21_222008) do
     t.datetime "updated_at", null: false
     t.integer "facing", default: 1, null: false
     t.bigint "container_id", null: false
+    t.text "description", null: false
     t.index ["container_id"], name: "index_characters_on_container_id"
     t.index ["room_id"], name: "index_characters_on_room_id"
   end

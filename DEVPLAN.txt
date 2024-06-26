@@ -16,7 +16,7 @@ x Add ability to pick up an object
 x Add ability to see what a player is holding when looking at a player
 x Add ability to drop an object
 x Add broadcasts for the pickup and drop actions
-Add ability to describe yourself and add this description to what is displayed when looked at
+x Add ability to describe yourself and add this description to what is displayed when looked at
 Add ability to 'say' things
 Add seed for slightly more expanded default room layout and some default accounts and stuff
 Add "locked doors" to connections. The lock is accessible from both sides, but may have different requirements - for example, one side requiring a key and the other side not requiring a key to lock or unlock it.

@@ -4,6 +4,7 @@ class Commander < ApplicationRecord
 
   def process(primary, components=[])
     subordinate.reload
+    subordinate.try(:room).try(:reload)
     Rails.logger.info("COMMAND ISSUED || PRIMARY COMMAND: #{primary}, ARGUMENTS: #{components}")
     primary = primary.downcase
     match = subordinate.commands[primary]
