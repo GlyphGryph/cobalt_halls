@@ -5,27 +5,16 @@ You control an individual kobold, but choose what you want to focus on. Will you
 The powers themselves will be (somewhat indirectly) controlled by those players who have "ascended", allowing an additional type of gameplay.
 
 Gameplan:
+PART 6: STRUCTURAL IMPROVEMENTS 1
+Create a shared module Actionable used by characters
+When creating an actionable object, save the list of valid verbs? (or are verbs conditional? Or per object?)
+Create a standard, genericized format for "actions" so they are defined in a place apart from the normal character logic in a way that works for anything that might execute them
+- can be done by player characters, generic kobolds, npcs, and maybe even other things, so 
+- can easily drop or add specific valid commands to a specific commanded object (perhaps via commander instance itself?)
+- create a "viewable" shared module with appropriate logic, and make sure every object has a firt and third person short and long description, and that they are called appropriately
 
-Part 5: STARTING ON GAME MECHANICS
-x Add objects to rooms
-x Add ability to see objects in rooms
-x Add ability to look at objects
-x Add ability to look at players (including "self")
-x Add objects to players
-x Add ability to pick up an object
-x Add ability to see what a player is holding when looking at a player
-x Add ability to drop an object
-x Add broadcasts for the pickup and drop actions
-x Add ability to describe yourself and add this description to what is displayed when looked at
-x Add ability to 'say' things
-Add seed for slightly more expanded default room layout and some default accounts and stuff
-Add "locked doors" to connections. The lock is accessible from both sides, but may have different requirements - for example, one side requiring a key and the other side not requiring a key to lock or unlock it.
-Add ability to "use" objects in room and neighbour connections - for example, opening a door, unlocking a door, flipping a rock.
-Allow interacting with objects to change their description. For example, flipped rock shows different image.
-Add ability to "use" held objects - including how this fails on objects with no use. Using a key on a locked door unlocks the door.
-Add ability to "eat" held objects - including how this fails on inedible objects. This destroys the object.
-Have "looking" at an object reveal valid verbs for that object
-Griffin room request: "Short hallway with six doors, three on each side. You come through a seventh door at the start of the hallway. A door at the other end of the hallway goes to a room with beds. There is a key on the ground in the middle. You'll need to use the key to get through a door later."
+PART 7: GAME MECHAINCS II - CORE GAMEPLAY
+Define and develop a mechanic for each of the decided upon roles to engage with - SAGE, PROVIDER, THESPIAN, COMMANDER
 
 
 PART X-LATER: LOGGING AND HISTORY
@@ -48,15 +37,21 @@ Implement a physical navigation menu to right of command box that can handle mov
 Restrict movement options to only valid exits, disable other buttons
 Implement an always visible inventory
 
-PART X-LATER: STRUCTURAL IMPROVEMENTS 1
-Create a standard, genericized format for "actions" so they are defined in a place apart from the normal character logic in a way that works for anything that might execute them
-- can be done by player characters, generic kobolds, npcs, and maybe even other things, so 
-- can easily drop or add specific valid commands to a specific commanded object (perhaps via commander instance itself?)
-- create a "viewable" shared module with appropriate logic, and make sure every object has a firt and third person short and long description, and that they are called appropriately
+PART X-LATER: STRUCTURAL IMPROVEMENTS 2
 
 PART X-LATER: TEST, REVIEW, FIX 2
 Figure out why we aren't always getting our initial session details in display.
 Make sure model instances are always properly reloaded before commands work with them. Stale data has been... a problem.
+
+PART X-LATER: GAME MECHANICS
+Allow interacting with objects to change their description. For example, flipped rock shows different image.
+Add ability to "use" held objects - including how this fails on objects with no use.
+Add ability to "eat" held objects - including how this fails on inedible objects. This destroys the object.
+Have "looking" at an object reveal valid verbs for that object
+Allow a "door" in a connection to be open or closed
+Add ability to "use" objects in room and neighbour connections - for example, opening a door, unlocking a door, flipping a rock.
+Add "locked doors" to connections. The lock is accessible from both sides, but may have different requirements - for example, one side requiring a key and the other side not requiring a key to lock or unlock it.
+Using a key on a locked door unlocks the door.
 
 ==== FINISHED SECTIONS ====
 
@@ -112,5 +107,20 @@ x Add scroll to display area
 x Add js hooks for logging in and out to update appropriate elements
 x Require or allow input of string names for directional commands instead of numbers
 x figure out why inputs are triggering six times
+
+x Part 5: STARTING ON GAME MECHANICS
+x Add objects to rooms
+x Add ability to see objects in rooms
+x Add ability to look at objects
+x Add ability to look at players (including "self")
+x Add objects to players
+x Add ability to pick up an object
+x Add ability to see what a player is holding when looking at a player
+x Add ability to drop an object
+x Add broadcasts for the pickup and drop actions
+x Add ability to describe yourself and add this description to what is displayed when looked at
+x Add ability to 'say' things
+x Add seed for slightly more expanded default room layout and some default accounts and stuff
+x Griffin room request: "Short hallway with six doors, three on each side. You come through a seventh door at the start of the hallway. A door at the other end of the hallway goes to a room with beds. There is a key on the ground in the middle. You'll need to use the key to get through a door later."
 
 
