@@ -1,0 +1,9 @@
+help: "Lists valid commands for character"
+look: "Shows contents of room by just typing 'look', or examine an object by typing 'look [object]'. Use 'look self' to examine your current state."
+turn: "Change facing."
+move: "Move forward, or in a given direction, 'move [direction]'. Moves character through an exit to a new area. Valid directions are 'forward' (or 'f'), 'right' (or 'r'), 'left' (or 'l'), and 'back' (or 'b')"
+get: "Move an item to your inventory"
+drop: "Move an item out of your inventory"
+describe: "Describe yourself"
+say: "Say something that can be heard by others in the room"
+

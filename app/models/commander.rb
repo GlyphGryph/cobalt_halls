@@ -7,12 +7,12 @@ class Commander < ApplicationRecord
     subordinate.try(:room).try(:reload)
     Rails.logger.info("COMMAND ISSUED || PRIMARY COMMAND: #{primary}, ARGUMENTS: #{components}")
     primary = primary.downcase
-    match = subordinate.commands[primary]
-    if(match.present?)
+    action = subordinate.find_command(primary)
+    if(action.present?)
       if(components.present?)
-        subordinate.send(match[:method], components)
+        subordinate.send(action.method, components)
       else
-        subordinate.send(match[:method])
+        subordinate.send(action.method)
       end
     else
       subordinate.display("Invalid Command for Character #{subordinate.id}: #{primary} #{components.join(" ")}")

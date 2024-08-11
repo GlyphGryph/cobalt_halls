@@ -1,3 +1,9 @@
+Cobalt Halls is a game where players control one kobold in a tribe, in one tribe of many, in a large, strange world composed of endless halls, rooms, and ruins, sapient weather, strange migratory beasts, and influenced by weird, seemingly malevolant powers.
+
+You control an individual kobold, but choose what you want to focus on. Will you hunt for food to feed your tribe? Explore and gain vital knowledge for improving their lot? Gather materials and craft tools to help others become more efficient? Work on building and improving the tribe's home and their outposts and boltholes? Adopt a leadership role, commanding and managing those kobolds not controlled by a player? Will you learn and help continue the tribes conditions, communing with those who have come before as a shaman? Or will you turn to the powers that influence the world, attempting to either appease them or forward their interests, in exchange for the kinds of power that may greatly strengthen your clan, at the risk of destroying them?
+
+The powers themselves will be (somewhat indirectly) controlled by those players who have "ascended", allowing an additional type of gameplay.
+
 
 END OF WORLD
 The world is temporary, changing. It only lasts 2 to 4 months, a "cycle" (or some other better word). Individuals a chance to ascend to the higher rooms as their old rooms fall into ruin, or to support other members of their tribe doing the same, or to send offerings. Those who have the support of their tribe, support of a patron power, those who are well equipped and skilled, or are Favored by The Halls (have a paid supporter account) are most likely to ascend, but success is never guaranteed, and the more players who try the lower the chance for everyone.
@@ -15,3 +21,9 @@ When not controlled, characters (player and npc) will act on the end of every ho
 Implement a "labeling" system - many things in games, including other players and characters, will not have game-defined names, only description and ids. The player can choose to "label" those things, permanently giving them a name when viewed from that character's perspective.
 
 We should have some way to handle blindness, and maybe have secondary sound-only filters for all actions?
+
+
+---
+
+Kobolds turn into objects with ritual?
+If object changes size in storage, auto pops out of storage
