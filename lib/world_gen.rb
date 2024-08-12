@@ -70,9 +70,10 @@ class WorldGen
     hallway_end.connect(0, bedroom, "a wrought-iron door")
     bedroom.connect(2, hallway_end, "a wrought-iron door")
 
-    # Characters
+    # Create characters and tribes
+    Tribe.create!(name: "TestTribe")
     5.times do
-      Character.create!(room: Room.first)
+      Character.create!(room: Room.first, tribe: Tribe.first)
     end
   end
 
