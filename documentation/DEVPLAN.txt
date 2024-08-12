@@ -4,9 +4,10 @@ A game where players join a kobold tribe and need to help keep it fed.
 Gameplan:
 PART 7: GAME MECHANICS II - CORE GAMEPLAY I - TRIBE I - CLAIMING MEMBERSHIP
 Implement Basic Tribe Spec.
-Regeenerate a new world on command.
-Spawn five kobold characters in starting room.
-Characters are no longer automatically associated with a kobold when created.
+x Regenerate a new world on command.
+x Spawn five kobold characters in starting room.
+Fix container_id disallowing null in db for relationships
+x Characters are no longer automatically associated with a kobold when created.
 Create a "tribe" object and associate all newly created kobolds with the newly created tribe.
 Make accounts Actionable, give them an action list that includes "logout" always and move logout logic there.
 Give accounts a "tribes" command that lists tribes
