@@ -1,0 +1,16 @@
+Define and develop a mechanic with an aspect each of the decided upon roles can engage with - SAGE, PROVIDER, THESPIAN, COMMANDER
+This mechanic: Keeping a small tribe of kobolds, some ensouled and some not, fed.
+Sage - Go out and figure out where prey animals are, what works to catch them, what plants are foragable, what dangers exist
+Provider - Hunt meat and gather plants to bring back to tribe
+Thespian - Make it "feel" koboldy to do those actions
+Commander - Give the ability to command non-ensouled kobolds to go out hunting
+
+First, we need a tribe to keep track of.
+- Generate a new world with a group of five kobolds organized into a tribe.
+- Implement a method and interface for ensouling - claiming one of those kobolds as your character instead of having one automatically created when you create an account
+- Have kobolds get hungry over time
+- Have descriptions for different hunger states: Full -> Hungry -> Very Hungry -> Ravenous -> Starving 
+- Create a larger map that's more explorable, with a ring of rooms and hallways and a central room for the tribe
+- Spawn food items around the map psuedorandomly (in a way players can learn from) over time
+- Player can eat a food item to reduce hunger
+- Player can command a kobold who is not ensouled to take actions, including eating

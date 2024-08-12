@@ -1,13 +1,19 @@
-Next Builod:
-A game where multiple players can simulatenously control different kobolds, talk to each other, and interact with both items and the environment to navigate the space.
+Next Build:
+A game where players join a kobold tribe and need to help keep it fed.
 
 Gameplan:
-PART 6: STRUCTURAL IMPROVEMENTS 1
-x Create a shared module Actionable used by characters or things players can control
-x Create a standard, genericized format for "actions" so they are defined in a place apart from the normal character logic in a way that works for anything that might execute them
+PART 7: GAME MECHANICS II - CORE GAMEPLAY I - TRIBE I - CLAIMING MEMBERSHIP
+Implement Basic Tribe Spec.
+Regeenerate a new world on command.
+Spawn five kobold characters in starting room.
+Characters are no longer automatically associated with a kobold when created.
+Create a "tribe" object and associate all newly created kobolds with the newly created tribe.
+Make accounts Actionable, give them an action list that includes "logout" always and move logout logic there.
+Give accounts a "tribes" command that lists tribes
+Also list other details of tribes - total kobolds and unclaimed kobolds, and ids of unclaimed kobolds in each tribe.
+Give accounts an "claim" command to associate them with a kobold, but have the command fail if they try to associate with an already claimed kobold or if they have already claimed a kobold.
+For character add a "tribe" command that lists tribal details, including all members and their soul status.
 
-PART 7: GAME MECHAINCS II - CORE GAMEPLAY
-Define and develop a mechanic for one of the decided upon roles to engage with - SAGE, PROVIDER, THESPIAN, COMMANDER
 
 PART X-LATER: LOGGING AND HISTORY
 Give each character a name
@@ -30,7 +36,7 @@ Restrict movement options to only valid exits, disable other buttons
 Implement an always visible inventory
 
 PART X-LATER: STRUCTURAL IMPROVEMENTS 2
-Work improving Actionable logic
+Further Work improving Actionable logic (see ACTIONABLE_SPEC)
 Create a "viewable" shared module with appropriate logic, and make sure every object has a first and third person short and long description, and that they are called appropriately
 
 PART X-LATER: TEST, REVIEW, FIX 2
@@ -116,5 +122,9 @@ x Add ability to describe yourself and add this description to what is displayed
 x Add ability to 'say' things
 x Add seed for slightly more expanded default room layout and some default accounts and stuff
 x Griffin room request: "Short hallway with six doors, three on each side. You come through a seventh door at the start of the hallway. A door at the other end of the hallway goes to a room with beds. There is a key on the ground in the middle. You'll need to use the key to get through a door later."
+
+PART 6: STRUCTURAL IMPROVEMENTS 1
+x Create a shared module Actionable used by characters or things players can control
+x Create a standard, genericized format for "actions" so they are defined in a place apart from the normal character logic in a way that works for anything that might execute them
 
 
