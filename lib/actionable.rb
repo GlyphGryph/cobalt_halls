@@ -1,6 +1,16 @@
+# a "command" is a text string from the user that can be processed in order to take...
+# an "action" is a specific type of response a game object can take to a player command
+
+# Everything that includes this MUST define:
+# actionable_action_ids -> The list of allowed commands for this object, including conditions
+# actionable_children -> (may return an empty array) The list of all lower hierarchy children
+# any special nonstandard actions
+# a "display" method for returning any textual results for commands if the including object does not have observers
+
 module Actionable
-  def self.commands
-    @all_commands ||= [
+  def self.actions
+    @all_actions ||= [
+      # Mob actions
       Action.new(:look),
       Action.new(:help),
       Action.new(:move, keys:['move', 'go']),
@@ -9,12 +19,19 @@ module Actionable
       Action.new(:get),
       Action.new(:drop),
       Action.new(:describe),
-      Action.new(:say)
+      Action.new(:say),
+      # Account actions
+      Action.new(:register),
+      Action.new(:login),
+      Action.new(:logout),
+      Action.new(:tribes),
+      Action.new(:claim),
+      Action.new(:status)
     ]
   end
 
-  def self.commands_by_alias
-    @all_commands_by_alias ||= Actionable.commands.inject({}) do |result, action|
+  def self.actions_by_command
+    @all_actions_by_command ||= Actionable.actions.inject({}) do |result, action|
       action.keys.each do |key|
         result[key] = action
       end
@@ -22,38 +39,94 @@ module Actionable
     end
   end
 
-  def self.find_command(key)
-    Actionable.commands_by_alias[key]
+  def self.actions_by_id
+    @all_actions_by_id ||= Actionable.actions.inject({}) do |result, action|
+      result[action.id] = action
+      result
+    end
   end
 
-  def find_command(key)
-    Actionable.find_command(key)
+  def self.find_action_by_command(key)
+    Actionable.actions_by_command[key]
   end
 
-  def set_actionable_commands(list)
-    @actionable_commands = list
+  def self.find_action_by_id(id)
+    Actionable.actions_by_id[id]
   end
-  
-  def actionable_commands
-    @actionable_commands ||= [:help, :look, :turn, :move, :get, :drop, :describe, :say]
+
+  def process_command(components)
+    command = components.first
+    found = false
+    # Find a matching command for this object, if it exists, and act on it
+    if valid_commands.include?(command)
+      #TODO: Act on command
+      action = Actionable.find_action_by_command(command)
+      remaining_components = components.drop(1)
+      Rails.logger.info action.method.inspect
+      Rails.logger.info remaining_components.inspect
+      self.send(action.method, remaining_components)
+      found = true
+    # If it doesn't, go down to the next level
+    else
+      actionable_children.each do |child|
+        found = child.process_command
+        break if found
+      end
+    end
+    return found
+  end
+
+  def actionable_action_ids
+    @actionable_action_ids ||= [:help, :look, :turn, :move, :get, :drop, :describe, :say]
   end
 
   def valid_commands
-    Actionable::commands.select{|command| actionable_commands.include?(command.id)}
+    commands = []
+    valid_actions.each do |action|
+      commands.concat(action.keys)
+    end
+    return commands.uniq
   end
 
-  # DEFAULT COMMAND PROCESSING
-  def help_action
-    return @help_response if @help_response
+  def valid_actions
+    actions = []
+    actionable_action_ids.each do |action|
+      actions << (Actionable.find_action_by_id(action))
+    end
+    actionable_children.each do |child|
+      begin
+        actions.concat(child.valid_actions)
+      rescue
+        debugger
+      end
+    end
+    return actions.uniq
+  end
+
+  # Redefine this for actionable items with lower members of hierarchy
+  def actionable_children
+    []
+  end
+  
+  def display
+    messages = Array(messages)
+    Rails.logger.info "Displaying message: #{messages}"
+    observers.each do |observer|
+      observer.display(messages, self)
+    end
+  end
+
+  #======= DEFAULT COMMAND PROCESSING ======
+  def help_action(arguments)
     @help_response = []
     @help_response << "Valid commands"
-    valid_commands.each do |action|
+    valid_actions.uniq.each do |action|
       @help_response << "#{action.id}: #{action.description}"
     end
     display(@help_response)
   end
 
-  def teleport_action(arguments=[])
+  def teleport_action(arguments)
     # error handling
     if(arguments.empty?)
       display("A destination must be provided.")
@@ -90,7 +163,7 @@ module Actionable
     end
   end
 
-  def move_action(arguments=[])
+  def move_action(arguments)
     # error handling
     if(arguments.empty?)
       # default direction is forward
@@ -134,7 +207,7 @@ module Actionable
     messages
   end
 
-  def turn_action(arguments=[])
+  def turn_action(arguments)
     # error handling
     if(arguments.empty?)
       # default direction is forward
@@ -170,7 +243,7 @@ module Actionable
     display(messages)
   end
 
-  def look_action(arguments=[])
+  def look_action(arguments)
     if(arguments.empty? || arguments.first == "room")
       display(sees)
       return
@@ -194,7 +267,7 @@ module Actionable
     display(messages)
   end
 
-  def get_action(arguments=[])
+  def get_action(arguments)
     found = self.room.find_contents(arguments)
     if(found)
       found.container = self.hands
@@ -206,7 +279,7 @@ module Actionable
     end
   end
 
-  def drop_action(arguments=[])
+  def drop_action(arguments)
     found = self.find_contents(arguments)
     if(found)
       found.container = self.room.container
@@ -218,13 +291,13 @@ module Actionable
     end
   end
 
-  def describe_action(arguments=[])
+  def describe_action(arguments)
     self.description = arguments.join(" ")
     self.save!
     display(["Your new description is...",self.description])
   end
 
-  def say_action(arguments = [])
+  def say_action(arguments)
     if(arguments.empty?)
       display("You said nothing.")
       other_characters.each{|oc| oc.display("#{name.capitalize} says nothing.")}

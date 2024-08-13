@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_26_210108) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_12_150840) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -34,8 +34,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_210108) do
     t.integer "facing", default: 1, null: false
     t.bigint "container_id", null: false
     t.text "description", null: false
+    t.bigint "tribe_id"
     t.index ["container_id"], name: "index_characters_on_container_id"
     t.index ["room_id"], name: "index_characters_on_room_id"
+    t.index ["tribe_id"], name: "index_characters_on_tribe_id"
   end
 
   create_table "characters_observers", id: false, charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
@@ -93,9 +95,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_210108) do
     t.index ["container_id"], name: "index_rooms_on_container_id"
   end
 
+  create_table "tribes", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "accounts", "observers"
   add_foreign_key "characters", "containers"
   add_foreign_key "characters", "rooms"
+  add_foreign_key "characters", "tribes"
   add_foreign_key "commanders", "characters"
   add_foreign_key "grubs", "containers"
   add_foreign_key "rooms", "containers"

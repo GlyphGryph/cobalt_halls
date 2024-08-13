@@ -2,6 +2,7 @@ class Commander < ApplicationRecord
   has_and_belongs_to_many :accounts
   belongs_to :subordinate, class_name: :Character, foreign_key: "character_id"  
 
+  # TODO: MAKE THIS ACTIONABLE NEXT, CAPTURES NOTHING NOW, EVENTUALLY ONLY CAPTURES 'COMMAND' ACTION TO BETTER FORWARD COMMNDS
   def process(primary, components=[])
     subordinate.reload
     subordinate.try(:room).try(:reload)

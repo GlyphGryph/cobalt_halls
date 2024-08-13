@@ -8,7 +8,7 @@ x Regenerate a new world on command.
 x Spawn five kobold characters in starting room.
 Fix container_id disallowing null in db for relationships
 x Characters are no longer automatically associated with a kobold when created.
-Create a "tribe" object and associate all newly created kobolds with the newly created tribe.
+x Create a "tribe" object and associate all newly created kobolds with the newly created tribe.
 Make accounts Actionable, give them an action list that includes "logout" always and move logout logic there.
 Give accounts a "tribes" command that lists tribes
 Also list other details of tribes - total kobolds and unclaimed kobolds, and ids of unclaimed kobolds in each tribe.

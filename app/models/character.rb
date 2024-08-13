@@ -2,6 +2,7 @@ class Character < ApplicationRecord
   include Actionable
 
   belongs_to :room
+  belongs_to :tribe, optional: true
   has_and_belongs_to_many :observers, dependent: :destroy
   has_many :commanders, dependent: :destroy
   belongs_to :hands, :class_name => 'Container', :foreign_key => 'container_id', dependent: :destroy, optional: true
