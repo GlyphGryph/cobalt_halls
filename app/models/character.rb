@@ -11,6 +11,7 @@ class Character < ApplicationRecord
   before_validation :set_description
   before_create :add_hands
 
+  scope :claimed, -> { where('id IN (SELECT character_id FROM commanders)') }
   scope :unclaimed, -> { where('id NOT IN (SELECT character_id FROM commanders)') }
 
   def key
@@ -50,5 +51,21 @@ private
   
   def set_description
     self.description ||= "a kobold"
+  end
+
+  def actionable_action_ids
+    [:help, :look, :turn, :move, :get, :drop, :describe, :say, :tribe]
+  end
+
+  def tribe_action(components)
+    messages = []
+    if(tribe.blank?)
+      messages << "You are not a member of a tribe."
+    else
+      messages << "Tribe: #{tribe.name}"
+      messages << "Total kobolds: #{tribe.characters.count}"
+      messages << "Total souls: #{tribe.characters.claimed.count}"
+    end
+    display(messages)
   end
 end

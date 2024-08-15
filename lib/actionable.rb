@@ -20,6 +20,8 @@ module Actionable
       Action.new(:drop),
       Action.new(:describe),
       Action.new(:say),
+      # Character exclusive actions
+      Action.new(:tribe),
       # Session actions
       Action.new(:register),
       Action.new(:login),
@@ -124,12 +126,13 @@ module Actionable
 
   #======= DEFAULT COMMAND PROCESSING ======
   def help_action(arguments)
-    @help_response = []
-    @help_response << "Valid commands"
+    help_response = []
+    help_response << "Valid commands"
     valid_actions.uniq.each do |action|
-      @help_response << "#{action.id}: #{action.description}"
+      description = action.description || "ERROR: NO DESCRIPTION PROVIDED. PLEASE REPORT."
+      help_response << "#{action.id} (#{action.keys}): #{description}"
     end
-    display(@help_response)
+    display(help_response)
   end
 
   def teleport_action(arguments)

@@ -5,6 +5,8 @@ class Account < ApplicationRecord
   belongs_to :observer, optional: true
   validates :name, presence: true, allow_blank: false, uniqueness: true
 
+  after_create :create_observer
+
   def characters
     characters = observer.characters
     return characters
@@ -35,6 +37,11 @@ class Account < ApplicationRecord
   end
 
 private
+  def create_observer
+    self.observer = Observer.create!
+    self.save!
+  end
+
   def actionable_action_ids
     [:tribes, :claim]
   end
@@ -48,8 +55,9 @@ private
     messages << "Tribes:"
     Tribe.all.each do |tribe|
       members = tribe.characters
-      messages << "#{tribe.name} (#{members.unclaimed.count}/#{members.count} unclaimed)"
-      members.each do |character|
+      unclaimed_members = members.unclaimed
+      messages << "#{tribe.name} (#{unclaimed_members.count}/#{members.count} unclaimed)"
+      unclaimed_members.each do |character|
         messages << "- #{character.key}"
       end
       messages << ""

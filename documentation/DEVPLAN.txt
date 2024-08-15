@@ -3,17 +3,16 @@ A game where players join a kobold tribe and need to help keep it fed.
 
 Gameplan:
 PART 7: GAME MECHANICS II - CORE GAMEPLAY I - TRIBE I - CLAIMING MEMBERSHIP
-Implement Basic Tribe Spec.
+x Implement Basic Tribe Spec part 1.
 x Regenerate a new world on command.
 x Spawn five kobold characters in starting room.
-Fix container_id disallowing null in db for relationships
 x Characters are no longer automatically associated with a kobold when created.
 x Create a "tribe" object and associate all newly created kobolds with the newly created tribe.
 x Make session channels and Accounts Actionable, fix Actionable
 # Give accounts a "tribes" command that lists tribes
 x Also list other details of tribes - total kobolds and unclaimed kobolds, and ids of unclaimed kobolds in each tribe.
 x Give accounts an "claim" command to associate them with a kobold, but have the command fail if they try to associate with an already claimed kobold or if they have already claimed a kobold.
-For character add a "tribe" command that lists tribal details, including all members and their soul status.
+x For character add a "tribe" command that lists tribal details, including all members and their soul status.
 
 PART 8: TEST, REVIEW, FIX 3
 Test review and fix full action stack, confirm everything is working
@@ -43,6 +42,7 @@ PART X-LATER: STRUCTURAL IMPROVEMENTS 2
 Further Work improving Actionable logic (see ACTIONABLE_SPEC)
 Create a "viewable" shared module with appropriate logic, and make sure every object has a first and third person short and long description, and that they are called appropriately
 Rework the "Commanders" object since the Actionable library now handles that logic - rework it to direct commands? Might not even need that, though, could be on account, or have one commander associated with each account (or other thing) that can issue commands, like the AI, rather than a commanderassociated with each individual commandable object, to pass "command/order" commands. Actual form TBD, current implementation just isn't good enough, though.
+Fix container_id disallowing null in db for relationships
 
 PART X-LATER: TEST, REVIEW, FIX 2
 Figure out why we aren't always getting our initial session details in display.
