@@ -5,7 +5,7 @@
 # actionable_action_ids -> The list of allowed commands for this object, including conditions
 # actionable_children -> (may return an empty array) The list of all lower hierarchy children
 # any special nonstandard actions
-# a "display" method for returning any textual results for commands if the including object does not have observers
+# a "display" method for returning any textual results for commands if the including object does not have an observer or observers
 
 module Actionable
   def self.actions
@@ -20,10 +20,11 @@ module Actionable
       Action.new(:drop),
       Action.new(:describe),
       Action.new(:say),
-      # Account actions
+      # Session actions
       Action.new(:register),
       Action.new(:login),
       Action.new(:logout),
+      # Account actions
       Action.new(:tribes),
       Action.new(:claim),
       Action.new(:status)
@@ -55,11 +56,14 @@ module Actionable
   end
 
   def process_command(components)
-    command = components.first
+    # TODO: Are these needed?
+    self.try(:room).try(:reload)
+
+    command = components.first.downcase
+    Rails.logger.info("COMMAND ISSUED || CONTEXT: #{self.class} || PRIMARY COMMAND: #{command}, ARGUMENTS: #{components.drop(1)}")
     found = false
     # Find a matching command for this object, if it exists, and act on it
     if valid_commands.include?(command)
-      #TODO: Act on command
       action = Actionable.find_action_by_command(command)
       remaining_components = components.drop(1)
       Rails.logger.info action.method.inspect
@@ -69,7 +73,8 @@ module Actionable
     # If it doesn't, go down to the next level
     else
       actionable_children.each do |child|
-        found = child.process_command
+        Rails.logger.info "Passing to child #{child.class}"
+        found = child.process_command(components)
         break if found
       end
     end
@@ -77,7 +82,7 @@ module Actionable
   end
 
   def actionable_action_ids
-    @actionable_action_ids ||= [:help, :look, :turn, :move, :get, :drop, :describe, :say]
+    [:help, :look, :turn, :move, :get, :drop, :describe, :say]
   end
 
   def valid_commands
@@ -93,13 +98,6 @@ module Actionable
     actionable_action_ids.each do |action|
       actions << (Actionable.find_action_by_id(action))
     end
-    actionable_children.each do |child|
-      begin
-        actions.concat(child.valid_actions)
-      rescue
-        debugger
-      end
-    end
     return actions.uniq
   end
 
@@ -108,11 +106,16 @@ module Actionable
     []
   end
   
-  def display
+  def display(messages)
     messages = Array(messages)
     Rails.logger.info "Displaying message: #{messages}"
-    observers.each do |observer|
+    if(defined? observer)
       observer.display(messages, self)
+    end
+    if(defined? observers)
+      observers.each do |observer|
+        observer.display(messages, self)
+      end
     end
   end
 

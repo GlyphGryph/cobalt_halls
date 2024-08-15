@@ -5,10 +5,13 @@ class Character < ApplicationRecord
   belongs_to :tribe, optional: true
   has_and_belongs_to_many :observers, dependent: :destroy
   has_many :commanders, dependent: :destroy
+  has_many :accounts, through: :commanders
   belongs_to :hands, :class_name => 'Container', :foreign_key => 'container_id', dependent: :destroy, optional: true
 
   before_validation :set_description
   before_create :add_hands
+
+  scope :unclaimed, -> { where('id NOT IN (SELECT character_id FROM commanders)') }
 
   def key
     @key ||= "char#{self.id}"
@@ -36,14 +39,9 @@ class Character < ApplicationRecord
     return seen
   end
 
-  def display(messages)
-    messages = Array(messages)
-    Rails.logger.info "Displaying message: #{messages}"
-    observers.each do |observer|
-      observer.display(messages, self)
-    end
+  def claimable?
+    !self.accounts.present?
   end
-
 
 private
   def add_hands

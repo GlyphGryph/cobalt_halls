@@ -21,6 +21,7 @@ class GameChannel < ApplicationCable::Channel
   def receive(data)
     Rails.logger.info "Received message: #{data}"
     commands = data["body"].split(" ")
+    display "> #{data["body"]}"
     if commands.empty?
       display "Nothing submitted."
       return
@@ -29,19 +30,20 @@ class GameChannel < ApplicationCable::Channel
     if(!command_processed)
       display "Command not recognized."
     end
+    update_status
   end
 
 private
   def actionable_action_ids
-    @actionable_action_ids ||= [:help, :login, :logout, :register, :status]
+    [:help, :login, :logout, :register, :status]
   end
 
   def actionable_children
-    children = []
     if @current_account.present?
-      children << @current_acount
+      return [@current_account]
+    else
+      return []
     end
-    return children
   end
 
   def display(value)
@@ -71,7 +73,6 @@ private
     @current_account = result.first
     stream_from @current_account.observer.channel_id
     display "Logged in as #{@current_account.name}"
-    update_status
     return
   end
 
@@ -82,7 +83,6 @@ private
       stop_stream_from @current_account.observer.channel_id
       @current_account = nil
       display "Logged out"
-      update_status
     end
   end
 
