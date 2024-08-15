@@ -27,7 +27,8 @@ module Actionable
       # Account actions
       Action.new(:tribes),
       Action.new(:claim),
-      Action.new(:status)
+      Action.new(:status),
+      Action.new(:command)
     ]
   end
 
@@ -52,7 +53,9 @@ module Actionable
   end
 
   def self.find_action_by_id(id)
-    Actionable.actions_by_id[id]
+    action = Actionable.actions_by_id[id]
+    raise "Couldn't find action with id [:#{id}]" if action.blank?
+    return action
   end
 
   def process_command(components)
