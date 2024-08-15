@@ -2,19 +2,13 @@ Next Build:
 A game where players join a kobold tribe and need to help keep it fed.
 
 Gameplan:
-PART 7: GAME MECHANICS II - CORE GAMEPLAY I - TRIBE I - CLAIMING MEMBERSHIP
-x Implement Basic Tribe Spec part 1.
-x Regenerate a new world on command.
-x Spawn five kobold characters in starting room.
-x Characters are no longer automatically associated with a kobold when created.
-x Create a "tribe" object and associate all newly created kobolds with the newly created tribe.
-x Make session channels and Accounts Actionable, fix Actionable
-# Give accounts a "tribes" command that lists tribes
-x Also list other details of tribes - total kobolds and unclaimed kobolds, and ids of unclaimed kobolds in each tribe.
-x Give accounts an "claim" command to associate them with a kobold, but have the command fail if they try to associate with an already claimed kobold or if they have already claimed a kobold.
-x For character add a "tribe" command that lists tribal details, including all members and their soul status.
+PART 8: GAME MECHANICS II - CORE GAMEPLAY I - TRIBE II - HUNGER
+- Implement hunger states on kobolds, default (fully satiated)
+- Include descriptions: Full -> Hungry -> Very Hungry -> Ravenous -> Starving 
+- Kobolds get hungry over time (very accelerated, 1 stage per minute)
+- Implement command to reset global hunger
 
-PART 8: TEST, REVIEW, FIX 3
+PART X-LATER: TEST, REVIEW, FIX 3
 Test review and fix full action stack, confirm everything is working
 
 
@@ -131,5 +125,17 @@ x Griffin room request: "Short hallway with six doors, three on each side. You c
 PART 6: STRUCTURAL IMPROVEMENTS 1
 x Create a shared module Actionable used by characters or things players can control
 x Create a standard, genericized format for "actions" so they are defined in a place apart from the normal character logic in a way that works for anything that might execute them
+
+PART 7: GAME MECHANICS II - CORE GAMEPLAY I - TRIBE I - CLAIMING MEMBERSHIP
+x Implement Basic Tribe Spec part 1.
+x Regenerate a new world on command.
+x Spawn five kobold characters in starting room.
+x Characters are no longer automatically associated with a kobold when created.
+x Create a "tribe" object and associate all newly created kobolds with the newly created tribe.
+x Make session channels and Accounts Actionable, fix Actionable
+# Give accounts a "tribes" command that lists tribes
+x Also list other details of tribes - total kobolds and unclaimed kobolds, and ids of unclaimed kobolds in each tribe.
+x Give accounts an "claim" command to associate them with a kobold, but have the command fail if they try to associate with an already claimed kobold or if they have already claimed a kobold.
+x For character add a "tribe" command that lists tribal details, including all members and their soul status.
 
 

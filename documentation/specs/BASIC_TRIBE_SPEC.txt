@@ -6,8 +6,8 @@ Thespian - Make it "feel" koboldy to do those actions
 Commander - Give the ability to command non-ensouled kobolds to go out hunting
 
 First, we need a tribe to keep track of.
-- Generate a new world with a group of five kobolds organized into a tribe.
-- Implement a method and interface for ensouling - claiming one of those kobolds as your character instead of having one automatically created when you create an account
+x - Generate a new world with a group of five kobolds organized into a tribe.
+x - Implement a method and interface for ensouling - claiming one of those kobolds as your character instead of having one automatically created when you create an account
 - Have kobolds get hungry over time
 - Have descriptions for different hunger states: Full -> Hungry -> Very Hungry -> Ravenous -> Starving 
 - Create a larger map that's more explorable, with a ring of rooms and hallways and a central room for the tribe
