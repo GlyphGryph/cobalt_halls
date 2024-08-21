@@ -22,6 +22,11 @@ Implement a "labeling" system - many things in games, including other players an
 
 We should have some way to handle blindness, and maybe have secondary sound-only filters for all actions?
 
+---
+
+COMMUNICATION
+
+In the Halls, spoken words turn into "word clouds", persistent floating echoes of what was said. In some ways this is obviously a game conceit for better async communication, but it also introduces potential cool mechanics. Word clouds can be intentionally dissipated, speaking reveals hidden characters are in the room, characters can communicate with hand signals if they don't want to be "overhead". Word clouds are "scented" and smell like a kobold - but maybe can be faked, to make it seem like someone said something they didn't?
 
 ---
 

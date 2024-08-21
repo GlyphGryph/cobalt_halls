@@ -7,6 +7,7 @@ class Character < ApplicationRecord
   has_many :commanders, dependent: :destroy
   has_many :accounts, through: :commanders
   belongs_to :hands, :class_name => 'Container', :foreign_key => 'container_id', dependent: :destroy, optional: true
+  # hunger - hunger can have a value from 10 to 80
 
   before_validation :set_description
   before_create :add_hands
@@ -16,6 +17,29 @@ class Character < ApplicationRecord
 
   def key
     @key ||= "char#{self.id}"
+  end
+  
+  def hunger_description
+    case hunger
+    when 0
+      "not hungry"
+    when 1
+      "hungry"
+    when 2
+      "very hungry"
+    when 3
+      "ravenous"
+    when 4
+      "starving"
+    end
+  end
+
+  def famish(amount=1)
+    self.hunger += amount
+  end
+  
+  def feed(amount=100)
+    self.hunger = Math.max(self.hunger-1, 0)
   end
 
   def other_characters
@@ -37,6 +61,7 @@ class Character < ApplicationRecord
     seen << "Position: #{room.name}"
     seen << "Facing: #{self.facing}"
     seen << "Has the following items: #{self.hands.grubs.map{|grub| "#{grub.name} (#{grub.key})"}.join(", ")}"
+    seen << "Is #{hunger_description}"
     return seen
   end
 

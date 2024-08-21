@@ -3,14 +3,19 @@ A game where players join a kobold tribe and need to help keep it fed.
 
 Gameplan:
 PART 8: GAME MECHANICS II - CORE GAMEPLAY I - TRIBE II - HUNGER
-- Implement hunger states on kobolds, default (fully satiated)
-- Include descriptions: Full -> Hungry -> Very Hungry -> Ravenous -> Starving 
-- Kobolds get hungry over time (very accelerated, 1 stage per minute)
-- Implement command to reset global hunger
+x Implement hunger states on kobolds, default (fully satiated)
+x Include descriptions: Full -> Hungry -> Very Hungry -> Ravenous -> Starving 
+x Method that increases hunger state
+x Method that decreases hunger state
+x Implement command to reset global hunger
+x Implement command to iterate global hunger
+
+PART 9: GAME MECHANICS II - CORE GAMEPLAY I - TRIBE III - EXECUTION OVER TIMEEXECUTION OVER TIME
+Kobolds get hungry over time (very accelerated, 1 stage per minute)
 
 PART X-LATER: TEST, REVIEW, FIX 3
 Test review and fix full action stack, confirm everything is working
-
+Fix objects not being reloaded when commands are executed, showing outdated state
 
 PART X-LATER: LOGGING AND HISTORY
 Give each character a name

@@ -83,4 +83,15 @@ class WorldGen
     Room.destroy_all
     Container.destroy_all
   end
+
+  def self.reset_state
+    Character.update_all(hunger: 0)
+  end
+
+  def self.process_tic
+    Character.all.each do |character|
+      character.famish
+      character.save!
+    end
+  end
 end
