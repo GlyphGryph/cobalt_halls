@@ -11,7 +11,12 @@ x Implement command to reset global hunger
 x Implement command to iterate global hunger
 
 PART 9: GAME MECHANICS II - CORE GAMEPLAY I - TRIBE III - EXECUTION OVER TIMEEXECUTION OVER TIME
-Kobolds get hungry over time (very accelerated, 1 stage per minute)
+Implement some sort of background script that can update world state over time
+What we want is a GameManager object in lib, I think
+Move the reset_state and process_tic methods there
+Create a new method, run_world, that creates a background job
+Have the background job periodically broadcast to characters (to make sure it all works)
+Have the background job periodically increment hunger, which sends an update to the character that gets hungry
 
 PART X-LATER: TEST, REVIEW, FIX 3
 Test review and fix full action stack, confirm everything is working
